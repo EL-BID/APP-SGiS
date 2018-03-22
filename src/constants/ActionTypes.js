@@ -1,4 +1,5 @@
 export const GET_CLUES = 'GET_CLUES';
+export const GET_CLUES_FAIL = 'GET_CLUES_FAIL';
 
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_TOKEN_FAIL = 'GET_TOKEN_FAIL';

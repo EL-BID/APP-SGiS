@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Text, View } from 'react-native';
 import { MaterialIcons } from 'react-native-vector-icons/MaterialIcons';
 
-class DashboardScreen extends Component {
+class EstadoFuerzaScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerLeft: <Button title="Menu" onPress={() => { navigation.navigate('DrawerToggle'); }} />,
   });
@@ -25,4 +25,4 @@ const styles = {
   }
 };
 
-export default DashboardScreen;
+export default EstadoFuerzaScreen;

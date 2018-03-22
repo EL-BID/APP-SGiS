@@ -5,15 +5,16 @@ import SelectCluesScreen from '../screens/SelectCluesScreen';
 const AuthStack = StackNavigator({    
   SignIn: {
     screen: SignInScreen,
-    navigationOptions: {
-      header: null,
-    }
+    navigationOptions: () => ({
+      header: null
+    })
   },
   SelectClues: {
     screen: SelectCluesScreen,
-    navigationOptions: {
-      header: null,
-    }
+    navigationOptions: () => ({
+      title: 'Seleccione una clues',
+      headerLeft: null
+    })
   },
 }, { 
   initialRouteName: 'SignIn'

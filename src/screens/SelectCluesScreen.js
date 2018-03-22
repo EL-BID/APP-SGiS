@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Header, List, ListItem } from 'react-native-elements';
+import { List, ListItem } from 'react-native-elements';
 import * as actions from '../actions';
 
 class SelectCluesScreen extends Component {
   componentDidMount() {
     this.props.showUsuarioClues();
-    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -16,7 +15,7 @@ class SelectCluesScreen extends Component {
 
   onSelectComplete(props) {
     if (props.clues) {
-      this.props.navigation.navigate('incidencias');
+      this.props.navigation.navigate('Dashboard');
     }
   }
 
@@ -30,6 +29,7 @@ class SelectCluesScreen extends Component {
         <ListItem
           key={clues.clues}
           title={clues.nombre}
+          titleNumberOfLines={2}
           onPress={() => this.onItemPress(clues.clues)}
         />
       );
@@ -39,10 +39,6 @@ class SelectCluesScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header
-          statusBarProps={{ backgroundColor: '#303F9F' }}
-          centerComponent={{ text: 'Seleccione una clue:', style: { color: '#fff' } }}
-        />
         <List>
           { this.renderCluesList() }
         </List>

@@ -18,7 +18,7 @@ class AuthLoadingScreen extends Component {
   }
 
   onAuthComplete(props) {
-    if (props.isLoggedIn) {
+    if (props.isSelectClues) {
       this.props.navigation.navigate('App');
     } else {
       this.props.navigation.navigate('Auth');
@@ -28,6 +28,7 @@ class AuthLoadingScreen extends Component {
   // Fetch the token from storage then navigate to our appropriate place
   bootstrapAsync = async () => {
     await this.props.getToken();
+    await this.props.getClues();
     //this.props.getClues();
     //await this.props.getToken();
     //console.log(userToken);
@@ -56,9 +57,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ auth }) => {
-  const { isLoggedIn, token } = auth;
+  const { isSelectClues, token, clues } = auth;
 
-  return { isLoggedIn, token };
+  return { isSelectClues, token, clues };
 };
 
 export default connect(mapStateToProps, actions)(AuthLoadingScreen);

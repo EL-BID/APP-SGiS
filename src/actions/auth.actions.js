@@ -7,8 +7,9 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   GET_TOKEN,
+  GET_TOKEN_FAIL,
   GET_CLUES,
-  GET_TOKEN_FAIL
+  GET_CLUES_FAIL
 } from '../constants/ActionTypes';
 
 export const emailChanged = (text) => ({
@@ -20,6 +21,24 @@ export const passwordChanged = (text) => ({
     type: PASSWORD_CHANGED,
     payload: text
   });
+
+export const getClues = () =>
+  (dispatch) => {
+    const query = 'SELECT clues FROM configuracion';
+    const params = [];
+
+    db.transaction((tx) => {
+      tx.executeSql(query, params, (tx, results) => {
+          const len = results.rows.length;
+          if (len > 0) {
+            const row = results.rows.item(0);
+            dispatch({ type: GET_CLUES, payload: row.clues });
+          } else {
+            dispatch({ type: GET_CLUES_FAIL, payload: 'clues' });
+          }
+         });
+    });
+  };
 
 export const getToken = () =>
   (dispatch) => {
@@ -33,23 +52,7 @@ export const getToken = () =>
             const row = results.rows.item(0);
             dispatch({ type: GET_TOKEN, payload: row.token });
           } else {
-            dispatch({ type: GET_TOKEN_FAIL, payload: 0 });
-          }
-         });
-    });
-  };
-
-export const getClues = () =>
-  (dispatch) => {
-    const query = 'SELECT clues FROM configuracion';
-    const params = [];
-
-    db.transaction((tx) => {
-      tx.executeSql(query, params, (tx, results) => {
-          const len = results.rows.length;
-          if (len > 0) {
-            const row = results.rows.item(0);
-            dispatch({ type: GET_CLUES, payload: row.clues });
+            dispatch({ type: GET_TOKEN_FAIL, payload: 'token' });
           }
          });
     });
@@ -78,18 +81,19 @@ export const loginUser = ({ email, password }) =>
   };
 
 const loginUserSuccess = (dispatch, user) => {
-  const { access_token, permisos, server_info, usuario, usuario_clues } = user;
+  const { access_token, server_info, usuario, usuario_clues } = user;
 
   db.transaction((tx) => {
-    tx.executeSql(`INSERT INTO configuracion (permisos, server_info, token,
-                    usuario, usuario_clues) VALUES (?,?,?,?,?)`,
-    [JSON.stringify(permisos), JSON.stringify(server_info), access_token,
-      JSON.stringify(usuario), JSON.stringify(usuario_clues)]);
+    tx.executeSql(`INSERT INTO configuracion 
+                  (server_info, token, usuario, usuario_clues) 
+                  VALUES (?,?,?,?)`,
+    [JSON.stringify(server_info), access_token,
+     JSON.stringify(usuario), JSON.stringify(usuario_clues)]);
   });
 
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload: true
+    payload: access_token
   });
 };
 

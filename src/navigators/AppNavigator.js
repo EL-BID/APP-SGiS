@@ -7,9 +7,9 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 const AppNavigator = SwitchNavigator({
   AuthLoading: {
     screen: AuthLoadingScreen,
-    navigationOptions: {
-      header: null,
-    }
+    navigationOptions: () => ({
+      header: null
+    })
   },
   App: AppDrawer,
   Auth: AuthStack,

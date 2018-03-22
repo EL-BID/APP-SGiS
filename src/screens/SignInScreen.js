@@ -7,13 +7,13 @@ import { Spinner } from '../components/Spinner';
 import * as actions from '../actions';
 
 class SingInScreen extends Component {
-  getDerivedStateFromProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.onAuthComplete(nextProps);
   }
 
   onAuthComplete(props) {
     if (props.isLoggedIn) {
-      //this.props.navigation.navigate('selectClues');
+      this.props.navigation.navigate('SelectClues');
     }
   }
 

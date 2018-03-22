@@ -1,18 +1,18 @@
 import {
-  GET_TOKEN,
   SHOW_INCIDENCIAS
 } from '../constants/ActionTypes';
 
 const initialState = {
-  search: '',
-  token: null,
-  listIncidencias: []
+  loading: false,
+  listIncidencias: [],
+  page: 0,
+  limit: 15,
+  error: null,  
+  refreshing: false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_TOKEN:
-      return { ...state, token: action.payload };
     case SHOW_INCIDENCIAS:
       return Object.assign({}, state, { listIncidencias: action.payload });
     default:
