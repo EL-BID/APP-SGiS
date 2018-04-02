@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ImageBackground, Text, View } from 'react-native';
+import { Image, ImageBackground, StatusBar, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { FormInput, Button } from 'react-native-elements';
 import { Spinner } from '../components/Spinner';
@@ -51,6 +51,7 @@ class SingInScreen extends Component {
         source={require('../../assets/images/fmovil.png')}
         style={styles.container}
       >
+        <StatusBar backgroundColor="#303F9F" barStyle="light-content" />
         <View>
           <Image
             style={styles.logoStyle}

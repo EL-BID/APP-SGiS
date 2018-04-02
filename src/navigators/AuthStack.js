@@ -13,7 +13,11 @@ const AuthStack = StackNavigator({
     screen: SelectCluesScreen,
     navigationOptions: () => ({
       title: 'Seleccione una clues',
-      headerLeft: null
+      headerLeft: null,
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
     })
   },
 }, { 

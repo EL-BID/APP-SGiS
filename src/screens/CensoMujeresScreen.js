@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Text, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-class DashboardScreen extends Component {
+class CensoMujeresScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
   });
@@ -32,4 +32,4 @@ const styles = {
   }
 };
 
-export default DashboardScreen;
+export default CensoMujeresScreen;

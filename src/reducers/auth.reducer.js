@@ -7,7 +7,9 @@ import {
   GET_TOKEN,
   GET_TOKEN_FAIL,
   GET_CLUES,
-  GET_CLUES_FAIL
+  GET_CLUES_FAIL,
+  INSERT_SELECT_CLUES,
+  REFRESH_TOKEN_SUCCESS
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -41,6 +43,10 @@ export default function (state = initialState, action) {
       return { ...state, token: action.payload, isLoggedIn: true };
     case LOGIN_USER_FAIL:
       return { ...state, error: 'Authentication Failed.', password: '', loading: false };
+    case INSERT_SELECT_CLUES:
+      return { ...state, clues: action.payload, isSelectClues: true };
+    case REFRESH_TOKEN_SUCCESS:
+      return { ...state, token: action.payload };
     default:
       return state;
   }

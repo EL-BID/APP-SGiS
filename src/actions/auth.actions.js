@@ -9,7 +9,8 @@ import {
   GET_TOKEN,
   GET_TOKEN_FAIL,
   GET_CLUES,
-  GET_CLUES_FAIL
+  GET_CLUES_FAIL,
+  INSERT_SELECT_CLUES
 } from '../constants/ActionTypes';
 
 export const emailChanged = (text) => ({
@@ -100,3 +101,11 @@ const loginUserSuccess = (dispatch, user) => {
 const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
+
+export const insertSelectClues = (clues) => 
+  (dispatch) => {
+    db.transaction((tx) => {
+      tx.executeSql('UPDATE configuracion SET clues=?', [clues]);
+      dispatch({ type: INSERT_SELECT_CLUES, payload: clues });
+    });
+  };

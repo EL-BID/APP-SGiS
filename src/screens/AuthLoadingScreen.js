@@ -29,12 +29,6 @@ class AuthLoadingScreen extends Component {
   bootstrapAsync = async () => {
     await this.props.getToken();
     await this.props.getClues();
-    //this.props.getClues();
-    //await this.props.getToken();
-    //console.log(userToken);
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    //this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   // Render any loading content that you like here

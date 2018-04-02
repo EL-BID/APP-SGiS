@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Text, View } from 'react-native';
-import { MaterialIcons } from 'react-native-vector-icons/MaterialIcons';
+import { StatusBar, Text, View } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class EstadoFuerzaScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <Button title="Menu" onPress={() => { navigation.navigate('DrawerToggle'); }} />,
+    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
   });
 
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
         <Text style={styles.welcome}>
           Screen1
         </Text>
@@ -20,8 +21,14 @@ class EstadoFuerzaScreen extends Component {
 
 const styles = {
   container: {
+    flex: 1
+  },
+  iconStyle: {
     flex: 1,
-    backgroundColor: '#f9f9f9'
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    color: 'white',
+    fontSize: 30
   }
 };
 

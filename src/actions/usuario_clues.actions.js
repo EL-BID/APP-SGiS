@@ -1,11 +1,10 @@
 import { db } from '../config/db';
 import {
-  SHOW_USUARIO_CLUES,
-  INSERT_SELECT_CLUES
+  SHOW_USUARIO_CLUES
 } from '../constants/ActionTypes';
 
-export const showUsuarioClues = () => {
-  return (dispatch, getState) => {
+export const showUsuarioClues = () => 
+  (dispatch) => {
     const query = 'SELECT usuario_clues FROM configuracion';
     const params = [];
 
@@ -20,13 +19,4 @@ export const showUsuarioClues = () => {
          });
     });
   };
-};
 
-export const insertSelectClues = (clues) => {
-  return (dispatch, getState) => {
-    db.transaction((tx) => {
-      tx.executeSql('UPDATE configuracion SET clues=?', [clues]);
-      dispatch({ type: INSERT_SELECT_CLUES, payload: clues });
-    });
-  };
-};

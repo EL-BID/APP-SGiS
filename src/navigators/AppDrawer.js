@@ -2,7 +2,9 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import DashboardScreen from '../screens/DashboardScreen';
 import IncidenciasScreen from '../screens/IncidenciasScreen';
+import IncidenciaDetalleScreen from '../screens/IncidenciaDetalleScreen';
 import EstadoFuerzaScreen from '../screens/EstadoFuerzaScreen';
+import CensoMujeresScreen from '../screens/CensoMujeresScreen';
 
 const StackDashboard = StackNavigator({
 	Dashboard: {
@@ -29,6 +31,17 @@ const StackIncidencias = StackNavigator({
         backgroundColor: '#3F51B5'
       }
     })
+  },
+  IncidenciaDetalle: {
+		screen: IncidenciaDetalleScreen,
+    navigationOptions: () => ({
+      title: 'Incidencia Detalle',
+      //drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
 	}
 });
 
@@ -46,15 +59,32 @@ const StackEstadoFuerza = StackNavigator({
 	}
 });
 
+const StackCensoMujeres = StackNavigator({
+	CensoMujeres: {
+		screen: CensoMujeresScreen,
+    navigationOptions: () => ({
+      title: 'Censo de Mujeres',
+      //drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
+	}
+});
+
 export default AppDrawer = DrawerNavigator({
-  Screen1: {
+  ScreenDashboard: {
     screen: StackDashboard
   },
-  Screen2: {
+  ScreenIncidencias: {
     screen: StackIncidencias
   },
-  Screen3: {
+  ScreenEstadoFuerza: {
     screen: StackEstadoFuerza
+  },
+  ScreenCensoMujeres: {
+    screen: StackCensoMujeres
   }
 }, {
   drawerPosition: 'left',

@@ -14,7 +14,7 @@ class SelectCluesScreen extends Component {
   }
 
   onSelectComplete(props) {
-    if (props.clues) {
+    if (props.isSelectClues) {
       this.props.navigation.navigate('Dashboard');
     }
   }
@@ -24,16 +24,14 @@ class SelectCluesScreen extends Component {
   }
 
   renderCluesList() {
-    return this.props.usuario_clues.map((clues) => {
-      return (
-        <ListItem
-          key={clues.clues}
-          title={clues.nombre}
-          titleNumberOfLines={2}
-          onPress={() => this.onItemPress(clues.clues)}
-        />
-      );
-    });
+    return this.props.usuario_clues.map((clues) => (
+              <ListItem
+                key={clues.clues}
+                title={clues.nombre}
+                titleNumberOfLines={2}
+                onPress={() => this.onItemPress(clues.clues)}
+              />
+            ));
   }
 
   render() {
@@ -54,12 +52,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ usuarioClues }) => {
-  const { list, clues } = usuarioClues;
-  return {
-    usuario_clues: list,
-    clues
-  };
+const mapStateToProps = ({ usuarioClues, auth }) => {
+  const { list } = usuarioClues;
+  const { clues, isSelectClues } = auth;
+  return { usuario_clues: list, clues, isSelectClues };
 };
 
 export default connect(mapStateToProps, actions)(SelectCluesScreen);
