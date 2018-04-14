@@ -4,7 +4,7 @@ import { List, ListItem, SearchBar } from 'react-native-elements';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 class IncidenciasScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -23,8 +23,8 @@ class IncidenciasScreen extends Component {
 
   onItemPress(incidencia) {
     console.log(incidencia);
-    //this.props.insertSelectClues(clues);
-    this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
+    //this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
+    this.props.navigation.navigate('IncidenciaCamera');
   }
 
   makeRemoteRequest = async () => {

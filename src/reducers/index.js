@@ -4,12 +4,14 @@ import navReducer from './nav.reducer';
 import authReducer from './auth.reducer';
 import usuarioCluesReducer from './usuario_clues.reducer';
 import incidenciasReducer from './incidencias.reducer';
+import censoReducer from './censo.reducer';
 
 const AppReducer = combineReducers({
   nav: navReducer,
   auth: authReducer,
   usuarioClues: usuarioCluesReducer,
-  incidencias: incidenciasReducer
+  incidencias: incidenciasReducer,
+  censo: censoReducer
 });
 
 export default AppReducer;

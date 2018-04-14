@@ -1,4 +1,4 @@
-import { db } from '../config/db';
+import { db } from '../utils/db';
 import {
   SHOW_USUARIO_CLUES
 } from '../constants/ActionTypes';

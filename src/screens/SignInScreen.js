@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, ImageBackground, StatusBar, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { FormInput, Button } from 'react-native-elements';
-import { Spinner } from '../components/Spinner';
+import { Spinner } from '../resources/components/Spinner';
 
 import * as actions from '../actions';
 
@@ -48,14 +48,14 @@ class SingInScreen extends Component {
   render() {
     return (
       <ImageBackground
-        source={require('../../assets/images/fmovil.png')}
+        source={require('../resources/images/fmovil.png')}
         style={styles.container}
       >
         <StatusBar backgroundColor="#303F9F" barStyle="light-content" />
         <View>
           <Image
             style={styles.logoStyle}
-            source={require('../../assets/images/logo.png')}
+            source={require('../resources/images/logo.png')}
           />
 
           <View>

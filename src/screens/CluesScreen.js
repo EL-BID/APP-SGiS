@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Image, StatusBar, Text, View } from 'react-native';
+import { StatusBar, Text, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import colors from '../resources/styles/colors';
 
-class DashboardScreen extends Component {
+class CluesScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
   });
@@ -10,11 +11,10 @@ class DashboardScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-        <Image
-          style={styles.logoStyle}
-          source={require('../resources/images/logo.png')}
-        />
+        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
+        <Text style={styles.welcome}>
+          Clues
+        </Text>
       </View>
     );
   }
@@ -30,12 +30,7 @@ const styles = {
     alignItems: 'flex-end',
     color: 'white',
     fontSize: 30
-  },
-  logoStyle: {
-    alignSelf: 'center',
-    width: 300,
-    height: 300
   }
 };
 
-export default DashboardScreen;
+export default CluesScreen;

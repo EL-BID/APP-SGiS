@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { db } from '../config/db';
+import { db } from '../utils/db';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,

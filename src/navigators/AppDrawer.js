@@ -1,10 +1,14 @@
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import DashboardScreen from '../screens/DashboardScreen';
-import IncidenciasScreen from '../screens/IncidenciasScreen';
-import IncidenciaDetalleScreen from '../screens/IncidenciaDetalleScreen';
+import CluesScreen from '../screens/CluesScreen';
+import IncidenciasScreen from '../screens/Incidencias/IncidenciasScreen';
+import IncidenciaDetalleScreen from '../screens/Incidencias/IncidenciaDetalleScreen';
+import IncidenciaCameraScreen from '../screens/Incidencias/IncidenciaCameraScreen';
 import EstadoFuerzaScreen from '../screens/EstadoFuerzaScreen';
-import CensoMujeresScreen from '../screens/CensoMujeresScreen';
+import CensoMujeresScreen from '../screens/Censo/CensoMujeresScreen';
+import CensoMujeresDetalleScreen from '../screens/Censo/CensoMujeresDetalleScreen';
+import CensoMujeresNuevoScreen from '../screens/Censo/CensoMujeresNuevoScreen';
 
 const StackDashboard = StackNavigator({
 	Dashboard: {
@@ -20,12 +24,26 @@ const StackDashboard = StackNavigator({
 	},
 });
 
+const StackClues = StackNavigator({
+	Clues: {
+		screen: CluesScreen,
+    navigationOptions: () => ({
+      title: 'Clues',
+      //drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
+	},
+});
+
 const StackIncidencias = StackNavigator({
 	Incidencias: {
 		screen: IncidenciasScreen,
     navigationOptions: () => ({
       title: 'Incidencias',
-      //drawerLockMode: 'locked-closed',
+      drawerLockMode: 'locked-closed',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#3F51B5'
@@ -36,7 +54,18 @@ const StackIncidencias = StackNavigator({
 		screen: IncidenciaDetalleScreen,
     navigationOptions: () => ({
       title: 'Incidencia Detalle',
-      //drawerLockMode: 'locked-closed',
+      drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
+	},
+  IncidenciaCamera: {
+		screen: IncidenciaCameraScreen,
+    navigationOptions: () => ({
+      title: 'Tomar foto',
+      drawerLockMode: 'locked-closed',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#3F51B5'
@@ -50,7 +79,7 @@ const StackEstadoFuerza = StackNavigator({
 		screen: EstadoFuerzaScreen,
     navigationOptions: () => ({
       title: 'Estado de Fuerza',
-      //drawerLockMode: 'locked-closed',
+      drawerLockMode: 'locked-closed',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#3F51B5'
@@ -64,7 +93,29 @@ const StackCensoMujeres = StackNavigator({
 		screen: CensoMujeresScreen,
     navigationOptions: () => ({
       title: 'Censo de Mujeres',
-      //drawerLockMode: 'locked-closed',
+      drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
+  },
+  CensoMujeresDetalle: {
+		screen: CensoMujeresDetalleScreen,
+    navigationOptions: () => ({
+      title: 'Censo Detalle',
+      drawerLockMode: 'locked-closed',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#3F51B5'
+      }
+    })
+	},
+  CensoMujeresNuevo: {
+		screen: CensoMujeresNuevoScreen,
+    navigationOptions: () => ({
+      title: 'Registrar Persona',
+      drawerLockMode: 'locked-closed',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#3F51B5'
@@ -76,6 +127,9 @@ const StackCensoMujeres = StackNavigator({
 export default AppDrawer = DrawerNavigator({
   ScreenDashboard: {
     screen: StackDashboard
+  },
+  ScreenClues: {
+    screen: StackClues
   },
   ScreenIncidencias: {
     screen: StackIncidencias

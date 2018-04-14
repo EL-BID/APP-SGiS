@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { StatusBar, Text, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import colors from '../resources/styles/colors';
 
-class CensoMujeresScreen extends Component {
+class IncidenciaCameraScreen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
   });
@@ -10,9 +11,9 @@ class CensoMujeresScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
+        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
         <Text style={styles.welcome}>
-          Screen1
+          Clues
         </Text>
       </View>
     );
@@ -32,4 +33,4 @@ const styles = {
   }
 };
 
-export default CensoMujeresScreen;
+export default IncidenciaCameraScreen;
