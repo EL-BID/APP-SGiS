@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, View } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StatusBar, Text, View, StyleSheet } from 'react-native';
+import { Container, Header, Left, Body, Right, Icon, Title } from 'native-base';
+import colors from '../resources/styles/colors';
 
 class EstadoFuerzaScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
-  });
-
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-        <Text style={styles.welcome}>
-          Screen1
-        </Text>
-      </View>
+      <Container>
+        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
+        <Header style={styles.headerStyle}>
+          <Left>
+            <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name='md-menu' style={styles.iconStyle} />
+          </Left>
+          <Body>
+            <Title>Estado de Fuerza</Title>
+          </Body>
+          <Right />
+        </Header>
+        <View style={styles.container}>
+          <Text>
+            Estado de Fuerza
+          </Text>
+        </View>
+      </Container>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerStyle: {
+    backgroundColor: colors.defaultPrimaryColor,
+    borderBottomColor: 'white'
   },
   iconStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    color: 'white',
-    fontSize: 30
+    color: 'white'
   }
-};
+});
 
 export default EstadoFuerzaScreen;

@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, StatusBar, Text, View } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
+import { ActivityIndicator, FlatList, InteractionManager, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
+import { Container, Header, Left, Body, Right, List, ListItem, Icon, Title } from 'native-base';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
-
+import colors from '../../resources/styles/colors';
 import * as actions from '../../actions';
 
 class CensoMujeresScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
-  });
-
   componentDidMount() {
-    this.makeRemoteRequest();
+    InteractionManager.runAfterInteractions(() => {
+      this.makeRemoteRequest();
+    });
   }
 
   onSearchChange(text) {
-    console.log(text);
     const { clues, token } = this.props;
     //this.props.onSearchChanged(text, clues, token);
   }
 
   onItemPress(censo) {
-    console.log(censo);
-    //this.props.insertSelectClues(clues);
     this.props.navigation.navigate('CensoMujeresDetalle', { censo });
   }
 
@@ -55,8 +49,22 @@ class CensoMujeresScreen extends Component {
 
   renderHeader = () => <SearchBar lightTheme round onChangeText={this.onSearchChange.bind(this)} placeholder='Buscar persona...' />;
 
+  renderItem = (item) => (
+    <ListItem
+      onPress={() => this.onItemPress(item)}
+    >
+      <Body>
+        <Text style={styles.titleTextStyle}>{item.id}</Text>
+        <Text note>{item.nombre} {item.paterno} {item.materno}</Text>
+      </Body>
+      <Right>
+        <Text note>{item.edad} años</Text>
+      </Right>
+    </ListItem>
+  ); 
+  
   renderFooter = () => {
-    if (!this.props.loading) return null;
+    if (this.props.loading) return null;
 
     return (
       <View
@@ -76,7 +84,7 @@ class CensoMujeresScreen extends Component {
 
     return (
       <ActionButton
-        buttonColor="#FF4081"
+        buttonColor={colors.accentColor}
         onPress={() => { this.props.navigation.navigate('CensoMujeresNuevo'); }}
       />
     );
@@ -84,67 +92,55 @@ class CensoMujeresScreen extends Component {
 
   render() {
     return (
-      <View>
-        <List containerStyle={styles.listStyle}>
-          <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-          <FlatList
-            data={this.props.censo}
-            renderItem={({ item }) => { 
-              return (
-                <ListItem
-                  title={<Text style={styles.titleStyle}>{item.id}</Text>}
-                  subtitleNumberOfLines={2}
-                  subtitle={
-                    <View style={styles.subtitleView}>
-                      <Text style={styles.subtitleText}>{item.nombre} {item.paterno} {item.materno}</Text>
-                    </View>
-                  }
-                  onPress={() => this.onItemPress(item)}
-                  containerStyle={{ borderBottomWidth: 0 }}
-                />
-              );
-            }}
-            keyExtractor={item => item.id}
-            ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={this.renderHeader}
-            ListFooterComponent={this.renderFooter}
-            refreshing={this.props.refreshing}
-            onRefresh={this.handleRefresh}
-            onEndReached={this.handleLoadMore}
-            onEndReachedThreshold={0.1}
-          />
+      <Container>
+        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
+        <Header style={styles.headerStyle}>
+          <Left>
+            <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name='md-menu' style={styles.iconStyle} />
+          </Left>
+          <Body>
+            <Title>Incidencias</Title>
+          </Body>
+          <Right />
+        </Header>
+        <List>
+        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
+        <FlatList
+          data={this.props.censo}
+          renderItem={({ item }) => this.renderItem(item)}
+          keyExtractor={(item, index) => index}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
+          refreshing={this.props.refreshing}
+          onRefresh={this.handleRefresh}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={0.1}
+        />
         </List>
         {this.renderActionButton()}
-      </View>
+      </Container>
     );
   }
 }
 
-const styles = {
-  listStyle: {
-    borderTopWidth: 0,
-    borderBottomWidth: 0
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  titleStyle: {
-    fontSize: 20,
-    paddingLeft: 10,
-  },
-  subtitleView: {
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingTop: 5
-  },
-  subtitleText: {
-
+  headerStyle: {
+    backgroundColor: colors.defaultPrimaryColor,
+    borderBottomColor: 'white'
   },
   iconStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    color: 'white',
-    fontSize: 30
+    color: 'white'
+  },
+  titleTextStyle: {
+    fontSize: 20,
   }
-};
+});
 
 const mapStateToProps = ({ censo, auth }) => {
   const { listCenso, page, limit, loading, error, refreshing } = censo;

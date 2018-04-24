@@ -1,4 +1,7 @@
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import React from 'react';
+import { Text } from 'react-native';
+import { DrawerNavigator, StackNavigator, DrawerItems } from 'react-navigation';
+import { Container, Content, Header, Left, Icon } from 'native-base';
 
 import DashboardScreen from '../screens/DashboardScreen';
 import CluesScreen from '../screens/CluesScreen';
@@ -14,13 +17,9 @@ const StackDashboard = StackNavigator({
 	Dashboard: {
 		screen: DashboardScreen,
     navigationOptions: () => ({
-      header: null
-      //title: 'Dashboard',
-      //drawerLockMode: 'locked-closed',
-      //headerTintColor: 'white',
-      //headerStyle: {
-      //  backgroundColor: '#3F51B5'
-      //}
+      header: null,
+      title: 'Dashboard',
+      drawerLockMode: 'locked-closed'
     })
 	},
 });
@@ -29,12 +28,9 @@ const StackClues = StackNavigator({
 	Clues: {
 		screen: CluesScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Clues',
-      //drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
+      drawerLockMode: 'locked-closed'
     })
 	},
 });
@@ -43,34 +39,25 @@ const StackIncidencias = StackNavigator({
 	Incidencias: {
 		screen: IncidenciasScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Incidencias',
-      drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
+      drawerLockMode: 'locked-closed'
     })
   },
   IncidenciaDetalle: {
 		screen: IncidenciaDetalleScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Incidencia Detalle',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
 	},
   IncidenciaCamera: {
 		screen: IncidenciaCameraScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Tomar foto',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
 	}
 });
@@ -79,12 +66,9 @@ const StackEstadoFuerza = StackNavigator({
 	EstadoFuerza: {
 		screen: EstadoFuerzaScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Estado de Fuerza',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
 	}
 });
@@ -92,38 +76,45 @@ const StackEstadoFuerza = StackNavigator({
 const StackCensoMujeres = StackNavigator({
 	CensoMujeres: {
 		screen: CensoMujeresScreen,
-    navigationOptions: () => ({
+    navigationOptions: () => ({      
+      header: null,
       title: 'Censo de Mujeres',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
   },
   CensoMujeresDetalle: {
 		screen: CensoMujeresDetalleScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Censo Detalle',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
 	},
   CensoMujeresNuevo: {
 		screen: CensoMujeresNuevoScreen,
     navigationOptions: () => ({
+      header: null,
       title: 'Registrar Persona',
       drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
     })
 	}
 });
+
+const CustomDrawerContentComponent = (props) => {
+  return (
+    <Container>
+      <Header style={{ backgroundColor: '#3F51B5' }}>
+        <Left style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <Icon name='person' style={{ color: 'white' }} />
+          <Text style={{ marginLeft: 5, fontSize: 22, color: 'white' }}>Bienvenido</Text>
+        </Left>
+      </Header>
+      <Content>
+        <DrawerItems {...props} />
+      </Content>
+    </Container>
+  );
+}
 
 export default AppDrawer = DrawerNavigator({
   ScreenDashboard: {
@@ -143,5 +134,8 @@ export default AppDrawer = DrawerNavigator({
   }
 }, {
   drawerPosition: 'left',
-  headerMode: 'float'
+  contentComponent: CustomDrawerContentComponent,
+  drawerOpenRoute: 'DrawerOpen',
+  drawerCloseRoute: 'DrawerClose',
+  drawerToggleRoute: 'DrawerToggle'
 });

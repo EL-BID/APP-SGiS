@@ -1,25 +1,16 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, FlatList, InteractionManager, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { Body, Icon, List, ListItem, Right } from 'native-base';
+import { Container, Header, Left, Body, Right, List, ListItem, Icon, Title } from 'native-base';
 import { connect } from 'react-redux';
-
+import colors from '../../resources/styles/colors';
 import * as actions from '../../actions';
 
 class IncidenciasScreen extends PureComponent {
-  static navigationOptions = ({ navigation }) => ({
-    headerLeft: <Icon name='md-menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />
-  });
-
-  state = {
-    renderList: false,
-  }
-
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.makeRemoteRequest();
     });
-    //setTimeout(() => { this.setState({ renderList: true }); }, 0);
   }
 
   onSearchChange(text) {
@@ -90,28 +81,33 @@ class IncidenciasScreen extends PureComponent {
   };
 
   render() {
-    const {
-      renderList,
-    } = this.state;
-
     return (
-      <List>
-      <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-      <FlatList
-          data={this.props.incidencias}
-          renderItem={({ item }) => this.renderItem(item)}
-          keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          refreshing={this.props.refreshing}
-          onRefresh={this.handleRefresh}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={0.1}
-          initialNumToRender={14}
-          removeClippedSubviews
-      />
-      </List>
+      <Container>
+        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
+        <Header style={styles.headerStyle}>
+          <Left>
+            <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name='md-menu' style={styles.iconStyle} />
+          </Left>
+          <Body>
+            <Title>Incidencias</Title>
+          </Body>
+          <Right />
+        </Header>
+        <List>
+        <FlatList
+            data={this.props.incidencias}
+            renderItem={({ item }) => this.renderItem(item)}
+            keyExtractor={(item, index) => index}
+            ItemSeparatorComponent={this.renderSeparator}
+            ListHeaderComponent={this.renderHeader}
+            ListFooterComponent={this.renderFooter}
+            refreshing={this.props.refreshing}
+            onRefresh={this.handleRefresh}
+            onEndReached={this.handleLoadMore}
+            onEndReachedThreshold={0.1}
+        />
+        </List>
+      </Container>
     );
   }
 }
@@ -122,10 +118,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  headerStyle: {
+    backgroundColor: colors.defaultPrimaryColor,
+    borderBottomColor: 'white'
+  },
   iconStyle: {
-    marginLeft: 15,
-    color: 'white',
-    fontSize: 30
+    color: 'white'
   },
   titleTextStyle: {
     fontSize: 20,
