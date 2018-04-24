@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, StatusBar, Text, View } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import React, { PureComponent } from 'react';
+import { ActivityIndicator, FlatList, InteractionManager, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
+import { Body, Icon, List, ListItem, Right } from 'native-base';
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 
-class IncidenciasScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
+class IncidenciasScreen extends PureComponent {
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: <Icon name='md-menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />
   });
 
+  state = {
+    renderList: false,
+  }
+
   componentDidMount() {
-    this.makeRemoteRequest();
+    InteractionManager.runAfterInteractions(() => {
+      this.makeRemoteRequest();
+    });
+    //setTimeout(() => { this.setState({ renderList: true }); }, 0);
   }
 
   onSearchChange(text) {
-    console.log(text);
     const { clues, token } = this.props;
     //this.props.onSearchChanged(text, clues, token);
   }
 
   onItemPress(incidencia) {
-    console.log(incidencia);
-    //this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
-    this.props.navigation.navigate('IncidenciaCamera');
+    this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
   }
 
   makeRemoteRequest = async () => {
@@ -37,6 +41,8 @@ class IncidenciasScreen extends Component {
   }
 
   handleLoadMore = () => {
+    const { page } = this.props;
+    this.props.nextPage(page);
     this.makeRemoteRequest();
   }
 
@@ -45,16 +51,30 @@ class IncidenciasScreen extends Component {
       style={{
         height: 1,
         width: '100%',
-        backgroundColor: '#CED0CE',
-        //marginLeft: '14%'
+        backgroundColor: '#CED0CE'
       }}
     />
   );
 
   renderHeader = () => <SearchBar lightTheme round onChangeText={this.onSearchChange.bind(this)} placeholder='Buscar incidencia...' />;
 
+  renderItem = (item) => (
+    <ListItem
+      onPress={() => this.onItemPress(item)}
+    >
+      <Body>
+        <Text style={styles.titleTextStyle}>{item.id}</Text>
+        <Text note>{item.pacientes[0].personas.nombre} {item.pacientes[0].personas.paterno} {item.pacientes[0].personas.materno}</Text>
+        <Text note>{item.movimientos_incidencias[item.movimientos_incidencias.length - 1].triage_colores.nombre}</Text>
+      </Body>
+      <Right>
+        <Text note>{item.pacientes[0].personas.edad} años</Text>
+      </Right>
+    </ListItem>
+  ); 
+
   renderFooter = () => {
-    if (!this.props.loading) return null;
+    if (this.props.loading) return null;
 
     return (
       <View
@@ -70,28 +90,17 @@ class IncidenciasScreen extends Component {
   };
 
   render() {
+    const {
+      renderList,
+    } = this.state;
+
     return (
-      <List containerStyle={styles.listStyle}>
-        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-        <FlatList
+      <List>
+      <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
+      <FlatList
           data={this.props.incidencias}
-          renderItem={({ item }) => { 
-            return (
-              <ListItem
-                title={<Text style={styles.titleStyle}>{item.id}</Text>}
-                subtitleNumberOfLines={2}
-                subtitle={
-                  <View style={styles.subtitleView}>
-                    <Text style={styles.subtitleText}>{item.pacientes[0].personas.nombre} {item.pacientes[0].personas.paterno} {item.pacientes[0].personas.materno} ({item.pacientes[0].personas.edad} años)</Text>
-                    <Text style={styles.subtitleText}>{item.movimientos_incidencias[item.movimientos_incidencias.length - 1].triage_colores.nombre}</Text>
-                  </View>
-                }
-                onPress={() => this.onItemPress(item)}
-                containerStyle={{ borderBottomWidth: 0 }}
-              />
-            );
-          }}
-          keyExtractor={item => item.id}
+          renderItem={({ item }) => this.renderItem(item)}
+          keyExtractor={(item, index) => index}
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
@@ -99,37 +108,29 @@ class IncidenciasScreen extends Component {
           onRefresh={this.handleRefresh}
           onEndReached={this.handleLoadMore}
           onEndReachedThreshold={0.1}
-        />
+          initialNumToRender={14}
+          removeClippedSubviews
+      />
       </List>
     );
   }
 }
 
-const styles = {
-  listStyle: {
-    borderTopWidth: 0,
-    borderBottomWidth: 0
-  },
-  titleStyle: {
-    fontSize: 20,
-    paddingLeft: 10,
-  },
-  subtitleView: {
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingTop: 5
-  },
-  subtitleText: {
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   iconStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
+    marginLeft: 15,
     color: 'white',
     fontSize: 30
+  },
+  titleTextStyle: {
+    fontSize: 20,
   }
-};
+});
 
 const mapStateToProps = ({ incidencias, auth }) => {
   const { listIncidencias, page, limit, loading, error, refreshing } = incidencias;

@@ -19,7 +19,7 @@ export const nextPage = (page) => ({
 
 export const showIncidencias = (clues, token, page, limit) => 
   (dispatch) => {
-    dispatch({ type: SHOW_INCIDENCIAS, payload: page + 15 });
+    dispatch({ type: SHOW_INCIDENCIAS });
 
     axios.get(`${URL}incidencias?edo_incidencia=&pagina=${page}&limite=${limit}`, { headers: {
       'Content-Type': 'application/json',

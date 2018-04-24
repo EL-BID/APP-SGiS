@@ -7,7 +7,9 @@ class CensoMujeresNuevoScreen extends Component {
     super();
     this.state = {
       localidad: '',
-      municipio: ''
+      municipio: '',
+      estadoEmbarazo: '',
+      derechohabiente: ''
     };
   }
 
@@ -114,6 +116,62 @@ class CensoMujeresNuevoScreen extends Component {
           <Picker
             selectedValue={this.state.localidad}
             onValueChange={(itemValue, itemIndex) => this.setState({ localidad: itemValue })}
+          >
+            <Picker.Item label="Chanal" value="1" />
+            <Picker.Item label="Naranjal" value="2" />
+          </Picker>
+        </View>
+        <View>
+          <FormLabel
+            labelStyle={styles.labelStyle}
+          >
+            Celular
+          </FormLabel>
+          <FormInput
+            inputStyle={styles.inputStyle}
+            placeholderTextColor="#757575"
+            placeholder="Celular"
+            underlineColorAndroid="#757575"
+            onChangeText={console.log("s")}
+          />
+        </View>
+        <View>
+          <FormLabel
+            labelStyle={styles.labelStyle}
+          >
+            Fecha de Nacimiento
+          </FormLabel>
+          <FormInput
+            inputStyle={styles.inputStyle}
+            placeholderTextColor="#757575"
+            placeholder="Fecha de Nacimiento"
+            underlineColorAndroid="#757575"
+            onChangeText={console.log("s")}
+          />
+        </View>
+        <View>
+          <FormLabel
+            labelStyle={styles.labelStyle}
+          >
+            Estado del Embarazo
+          </FormLabel>
+          <Picker
+            selectedValue={this.state.estadoEmbarazo}
+            onValueChange={(itemValue, itemIndex) => this.setState({ estadoEmbarazo: itemValue })}
+          >
+            <Picker.Item label="Chanal" value="1" />
+            <Picker.Item label="Naranjal" value="2" />
+          </Picker>
+        </View>
+        <View>
+          <FormLabel
+            labelStyle={styles.labelStyle}
+          >
+            Derechohabiente
+          </FormLabel>
+          <Picker
+            selectedValue={this.state.derechohabiente}
+            onValueChange={(itemValue, itemIndex) => this.setState({ derechohabiente: itemValue })}
           >
             <Picker.Item label="Chanal" value="1" />
             <Picker.Item label="Naranjal" value="2" />

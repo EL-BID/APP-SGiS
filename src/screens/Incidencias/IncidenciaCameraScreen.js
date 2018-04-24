@@ -1,36 +1,84 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, View } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import colors from '../resources/styles/colors';
+import {
+  StyleSheet,
+  Text,
+  View,
+  PixelRatio,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
-class IncidenciaCameraScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
-  });
+import ImagePicker from 'react-native-image-picker';
+
+export default class IncidenciaCameraScreen extends Component {
+
+  state = {
+    avatarSource: null
+  };
+
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
-        <Text style={styles.welcome}>
-          Clues
-        </Text>
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+          <View style={[styles.avatar, styles.avatarContainer, { marginBottom: 20 }]}>
+          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+            <Image style={styles.avatar} source={this.state.avatarSource} />
+          }
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  iconStyle: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    color: 'white',
-    fontSize: 30
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   }
-};
-
-export default IncidenciaCameraScreen;
+});

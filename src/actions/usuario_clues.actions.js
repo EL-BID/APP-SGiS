@@ -10,7 +10,6 @@ export const showUsuarioClues = () =>
 
     db.transaction((tx) => {
       tx.executeSql(query, params, (tx, results) => {
-          console.log('Query completed');
           const len = results.rows.length;
           if (len > 0) {
             const row = results.rows.item(0);

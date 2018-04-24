@@ -3,6 +3,7 @@ package com.ugus_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -12,7 +13,6 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.reactnative.camera.RNCameraPackage;
 import org.pgsqlite.SQLitePluginPackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -28,7 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new SQLitePluginPackage(),   // register SQLite Plugin here
           new MainReactPackage(),
-          new RNCameraPackage(),
+            new ImagePickerPackage(),
           new VectorIconsPackage()
       );
     }

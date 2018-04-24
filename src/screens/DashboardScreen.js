@@ -1,41 +1,49 @@
 import React, { Component } from 'react';
-import { Image, StatusBar, Text, View } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Image, StatusBar, Platform, StyleSheet, View } from 'react-native';
+import { Container, Header, Left, Body, Right, Icon, Title } from 'native-base';
 
 class DashboardScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft: <MaterialIcons name='menu' style={styles.iconStyle} onPress={() => { navigation.navigate('DrawerOpen'); }} />,
-  });
-
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="#303F9F" animated barStyle="light-content" /> 
-        <Image
-          style={styles.logoStyle}
-          source={require('../resources/images/logo.png')}
-        />
-      </View>
+      <Container>
+        <Header style={styles.headerStyle}>
+          <Left>
+            <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name='md-menu' style={styles.iconStyle} />
+          </Left>
+          <Body>
+            <Title>Dashboard</Title>
+          </Body>
+          <Right />
+        </Header>
+        <View style={styles.container}>
+          <Image
+            style={styles.logoStyle}
+            source={require('../resources/images/logo.png')}
+          />
+        </View>
+
+      </Container>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerStyle: {
+    backgroundColor: '#3F51B5',
+    borderBottomColor: 'white'
   },
   iconStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    color: 'white',
-    fontSize: 30
+    color: 'white'
   },
   logoStyle: {
-    alignSelf: 'center',
     width: 300,
     height: 300
   }
-};
+});
 
 export default DashboardScreen;

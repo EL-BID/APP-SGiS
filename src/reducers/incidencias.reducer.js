@@ -19,9 +19,17 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case SHOW_INCIDENCIAS:
-      return { ...state, loading: true, page: action.payload };
+      return { ...state, loading: true };
     case SHOW_INCIDENCIAS_SUCCESS:
-      return { ...state, listIncidencias: [...state.listIncidencias, ...action.payload], loading: false };
+      return { 
+        ...state, 
+        listIncidencias: [
+          ...state.listIncidencias.filter((x) => 
+          !action.payload.find((y) => y.id === x.id)),
+          ...action.payload
+        ], 
+        loading: false 
+      };
     case SHOW_INCIDENCIAS_FAIL:
       return { ...state, error: action.payload, loading: false };
     case REFRESH_TOKEN_FAIL:

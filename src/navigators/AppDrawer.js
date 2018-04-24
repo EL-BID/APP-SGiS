@@ -14,12 +14,13 @@ const StackDashboard = StackNavigator({
 	Dashboard: {
 		screen: DashboardScreen,
     navigationOptions: () => ({
-      title: 'Dashboard',
+      header: null
+      //title: 'Dashboard',
       //drawerLockMode: 'locked-closed',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#3F51B5'
-      }
+      //headerTintColor: 'white',
+      //headerStyle: {
+      //  backgroundColor: '#3F51B5'
+      //}
     })
 	},
 });
