@@ -4,7 +4,8 @@ import { DrawerNavigator, StackNavigator, DrawerItems } from 'react-navigation';
 import { Container, Content, Header, Left, Icon } from 'native-base';
 
 import DashboardScreen from '../screens/DashboardScreen';
-import CluesScreen from '../screens/CluesScreen';
+import CluesScreen from '../screens/Clues/CluesScreen';
+import CluesDetalleScreen from '../screens/Clues/CluesDetalleScreen';
 import IncidenciasScreen from '../screens/Incidencias/IncidenciasScreen';
 import IncidenciaDetalleScreen from '../screens/Incidencias/IncidenciaDetalleScreen';
 import IncidenciaCameraScreen from '../screens/Incidencias/IncidenciaCameraScreen';
@@ -31,6 +32,14 @@ const StackClues = StackNavigator({
       header: null,
       title: 'Clues',
       drawerLockMode: 'locked-closed'
+    })
+	},
+  CluesDetalle: {
+		screen: CluesDetalleScreen,
+    navigationOptions: () => ({
+      header: null,
+      title: 'Clues Detalle',
+      drawerLockMode: 'locked-closed',
     })
 	},
 });

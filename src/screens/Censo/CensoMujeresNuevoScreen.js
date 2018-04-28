@@ -26,7 +26,7 @@ class CensoMujeresNuevoScreen extends Component {
         <StatusBar backgroundColor={colors.darkPrimaryColor} animated barStyle="light-content" /> 
         <Header style={styles.headerStyle}>
           <Left>
-            <Icon name='md-menu' style={styles.iconStyle} onPress={() => this.props.navigation.navigate('DrawerOpen')}/>
+            <Icon onPress={() => this.props.navigation.goBack()} name='arrow-back' style={styles.iconStyle} />
           </Left>
           <Body>
             <Title>Registrar Mujer</Title>

@@ -11,7 +11,7 @@ const initialState = {
   loading: false,
   listIncidencias: [],
   page: 0,
-  limit: 15,
+  limit: 30,
   error: null,  
   refreshing: false
 };

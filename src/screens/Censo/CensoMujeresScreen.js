@@ -47,8 +47,6 @@ class CensoMujeresScreen extends Component {
     />
   );
 
-  renderHeader = () => <SearchBar lightTheme round onChangeText={this.onSearchChange.bind(this)} placeholder='Buscar persona...' />;
-
   renderItem = (item) => (
     <ListItem
       onPress={() => this.onItemPress(item)}
@@ -99,7 +97,7 @@ class CensoMujeresScreen extends Component {
             <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name='md-menu' style={styles.iconStyle} />
           </Left>
           <Body>
-            <Title>Incidencias</Title>
+            <Title>Censo de Mujeres</Title>
           </Body>
           <Right />
         </Header>
@@ -110,7 +108,6 @@ class CensoMujeresScreen extends Component {
           renderItem={({ item }) => this.renderItem(item)}
           keyExtractor={(item, index) => index}
           ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
           refreshing={this.props.refreshing}
           onRefresh={this.handleRefresh}

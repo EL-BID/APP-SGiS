@@ -13,11 +13,6 @@ class IncidenciasScreen extends PureComponent {
     });
   }
 
-  onSearchChange(text) {
-    const { clues, token } = this.props;
-    //this.props.onSearchChanged(text, clues, token);
-  }
-
   onItemPress(incidencia) {
     this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
   }
@@ -40,14 +35,12 @@ class IncidenciasScreen extends PureComponent {
   renderSeparator = () => (
     <View 
       style={{
-        height: 1,
+        backgroundColor: '#CED0CE',
+        heigh: 1,
         width: '100%',
-        backgroundColor: '#CED0CE'
       }}
     />
   );
-
-  renderHeader = () => <SearchBar lightTheme round onChangeText={this.onSearchChange.bind(this)} placeholder='Buscar incidencia...' />;
 
   renderItem = (item) => (
     <ListItem
@@ -99,12 +92,11 @@ class IncidenciasScreen extends PureComponent {
             renderItem={({ item }) => this.renderItem(item)}
             keyExtractor={(item, index) => index}
             ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
             refreshing={this.props.refreshing}
             onRefresh={this.handleRefresh}
-            onEndReached={this.handleLoadMore}
-            onEndReachedThreshold={0.1}
+            //onEndReached={this.handleLoadMore}
+            //onEndReachedThreshold={0.1}
         />
         </List>
       </Container>

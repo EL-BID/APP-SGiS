@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, InteractionManager, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { 
+  ActivityIndicator, 
+  FlatList, 
+  InteractionManager, 
+  StatusBar, 
+  StyleSheet, 
+  Text, 
+  View 
+} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Container, Header, Left, Body, Right, List, ListItem, Icon, Title } from 'native-base';
 import { connect } from 'react-redux';
-import colors from '../resources/styles/colors';
-import * as actions from '../actions';
+import colors from '../../resources/styles/colors';
+import * as actions from '../../actions';
 
 class CluesScreen extends Component {
   componentDidMount() {
@@ -46,9 +54,6 @@ class CluesScreen extends Component {
       }}
     />
   );
-
-  renderHeader = () => <SearchBar lightTheme round onChangeText={this.onSearchChange.bind(this)} placeholder='Buscar clues...' />;
-
   renderItem = (item) => (
     <ListItem
       onPress={() => this.onItemPress(item)}
@@ -99,7 +104,6 @@ class CluesScreen extends Component {
               renderItem={({ item }) => this.renderItem(item)}
               keyExtractor={(item, index) => index}
               ItemSeparatorComponent={this.renderSeparator}
-              ListHeaderComponent={this.renderHeader}
               ListFooterComponent={this.renderFooter}
               refreshing={this.props.refreshing}
               onRefresh={this.handleRefresh}
