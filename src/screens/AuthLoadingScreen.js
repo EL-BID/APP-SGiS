@@ -6,14 +6,16 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import * as actions from '../actions';
+import * as actions from '../redux/actions';
 
 class AuthLoadingScreen extends Component {
   componentDidMount() {
+    console.info('componentDidMount');
     this.bootstrapAsync();
   }
 
   componentWillReceiveProps(nextProps) {
+    console.info('componentWillReceiveProps');
     this.onAuthComplete(nextProps);
   }
 
@@ -33,6 +35,8 @@ class AuthLoadingScreen extends Component {
 
   // Render any loading content that you like here
   render() {
+    console.info('Render');
+    
     return (
       <View style={styles.container}>
         <ActivityIndicator size='large' />

@@ -1,8 +1,9 @@
-import { StackNavigator } from 'react-navigation';
-import SignInScreen from '../screens/SignInScreen';
-import SelectCluesScreen from '../screens/SelectCluesScreen';
+import { createStackNavigator } from 'react-navigation';
 
-const AuthStack = StackNavigator({    
+import SignInScreen from '../screens/Auth/SignInScreen';
+import SelectCluesScreen from '../screens/Auth/SelectCluesScreen';
+
+const AuthStack = createStackNavigator({   
   SignIn: {
     screen: SignInScreen,
     navigationOptions: () => ({

@@ -1,20 +1,32 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { DrawerNavigator, StackNavigator, DrawerItems } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator, DrawerItems } from 'react-navigation';
 import { Container, Content, Header, Left, Icon } from 'native-base';
 
-import DashboardScreen from '../screens/DashboardScreen';
-import CluesScreen from '../screens/Clues/CluesScreen';
-import CluesDetalleScreen from '../screens/Clues/CluesDetalleScreen';
-import IncidenciasScreen from '../screens/Incidencias/IncidenciasScreen';
-import IncidenciaDetalleScreen from '../screens/Incidencias/IncidenciaDetalleScreen';
-import IncidenciaCameraScreen from '../screens/Incidencias/IncidenciaCameraScreen';
-import EstadoFuerzaScreen from '../screens/EstadoFuerzaScreen';
-import CensoMujeresScreen from '../screens/Censo/CensoMujeresScreen';
-import CensoMujeresDetalleScreen from '../screens/Censo/CensoMujeresDetalleScreen';
-import CensoMujeresNuevoScreen from '../screens/Censo/CensoMujeresNuevoScreen';
+import DashboardScreen from '../screens/App/DashboardScreen';
+import CluesScreen from '../screens/App/Clues/CluesScreen';
+import CluesDetalleScreen from '../screens/App/Clues/CluesDetalleScreen';
+import IncidenciasScreen from '../screens/App/Incidencias/IncidenciasScreen';
+import IncidenciaDetalleScreen from '../screens/App/Incidencias/IncidenciaDetalleScreen';
+import IncidenciaCameraScreen from '../screens/App/Incidencias/IncidenciaCameraScreen';
+import EstadoFuerzaScreen from '../screens/App/EstadoFuerzaScreen';
+import CensoMujeresScreen from '../screens/App/Censo/CensoMujeresScreen';
+import CensoMujeresDetalleScreen from '../screens/App/Censo/CensoMujeresDetalleScreen';
+import CensoMujeresNuevoScreen from '../screens/App/Censo/CensoMujeresNuevoScreen';
+import RadioButtonScreen from '../screens/App/RadioButtonScreen';
 
-const StackDashboard = StackNavigator({
+const StackRadioButton = createStackNavigator({
+	RadioButton: {
+		screen: RadioButtonScreen,
+    navigationOptions: () => ({
+      header: null,
+      title: 'RadioButton',
+      drawerLockMode: 'locked-closed'
+    })
+	},
+});
+
+const StackDashboard = createStackNavigator({
 	Dashboard: {
 		screen: DashboardScreen,
     navigationOptions: () => ({
@@ -25,7 +37,7 @@ const StackDashboard = StackNavigator({
 	},
 });
 
-const StackClues = StackNavigator({
+const StackClues = createStackNavigator({
 	Clues: {
 		screen: CluesScreen,
     navigationOptions: () => ({
@@ -44,7 +56,7 @@ const StackClues = StackNavigator({
 	},
 });
 
-const StackIncidencias = StackNavigator({
+const StackIncidencias = createStackNavigator({
 	Incidencias: {
 		screen: IncidenciasScreen,
     navigationOptions: () => ({
@@ -71,7 +83,7 @@ const StackIncidencias = StackNavigator({
 	}
 });
 
-const StackEstadoFuerza = StackNavigator({
+const StackEstadoFuerza = createStackNavigator({
 	EstadoFuerza: {
 		screen: EstadoFuerzaScreen,
     navigationOptions: () => ({
@@ -82,7 +94,7 @@ const StackEstadoFuerza = StackNavigator({
 	}
 });
 
-const StackCensoMujeres = StackNavigator({
+const StackCensoMujeres = createStackNavigator({
 	CensoMujeres: {
 		screen: CensoMujeresScreen,
     navigationOptions: () => ({      
@@ -123,24 +135,15 @@ const CustomDrawerContentComponent = (props) => {
       </Content>
     </Container>
   );
-}
+};
 
-export default AppDrawer = DrawerNavigator({
-  ScreenDashboard: {
-    screen: StackDashboard
-  },
-  ScreenClues: {
-    screen: StackClues
-  },
-  ScreenIncidencias: {
-    screen: StackIncidencias
-  },
-  ScreenEstadoFuerza: {
-    screen: StackEstadoFuerza
-  },
-  ScreenCensoMujeres: {
-    screen: StackCensoMujeres
-  }
+export default AppDrawer = createDrawerNavigator({
+  ScreenDashboard: StackDashboard,
+  ScreenClues: StackClues,
+  ScreenIncidencias: StackIncidencias,
+  ScreenEstadoFuerza: StackEstadoFuerza,
+  ScreenCensoMujeres: StackCensoMujeres,
+  ScreenRadioButton: StackRadioButton
 }, {
   drawerPosition: 'left',
   contentComponent: CustomDrawerContentComponent,

@@ -1,20 +1,18 @@
-import { SwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 
+import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import AuthStack from './AuthStack';
 import AppDrawer from './AppDrawer';
-import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
-const AppNavigator = SwitchNavigator({
-  AuthLoading: {
-    screen: AuthLoadingScreen,
-    navigationOptions: () => ({
-      header: null
-    })
+const AppNavigator = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppDrawer,
+    Auth: AuthStack,
   },
-  App: AppDrawer,
-  Auth: AuthStack,
-}, { 
-  initialRouteName: 'AuthLoading'
-});
+  {
+    initialRouteName: 'AuthLoading',
+  }
+);
 
 export default AppNavigator;
