@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { createDrawerNavigator, createStackNavigator, DrawerItems } from 'react-navigation';
 import { Container, Content, Header, Left, Icon } from 'native-base';
 
@@ -13,18 +13,6 @@ import EstadoFuerzaScreen from '../screens/App/EstadoFuerzaScreen';
 import CensoMujeresScreen from '../screens/App/Censo/CensoMujeresScreen';
 import CensoMujeresDetalleScreen from '../screens/App/Censo/CensoMujeresDetalleScreen';
 import CensoMujeresNuevoScreen from '../screens/App/Censo/CensoMujeresNuevoScreen';
-import RadioButtonScreen from '../screens/App/RadioButtonScreen';
-
-const StackRadioButton = createStackNavigator({
-	RadioButton: {
-		screen: RadioButtonScreen,
-    navigationOptions: () => ({
-      header: null,
-      title: 'RadioButton',
-      drawerLockMode: 'locked-closed'
-    })
-	},
-});
 
 const StackDashboard = createStackNavigator({
 	Dashboard: {
@@ -131,19 +119,20 @@ const CustomDrawerContentComponent = (props) => {
         </Left>
       </Header>
       <Content>
-        <DrawerItems {...props} />
+        <DrawerItems 
+          {...props} 
+        />
       </Content>
     </Container>
   );
 };
 
 export default AppDrawer = createDrawerNavigator({
-  ScreenDashboard: StackDashboard,
-  ScreenClues: StackClues,
-  ScreenIncidencias: StackIncidencias,
-  ScreenEstadoFuerza: StackEstadoFuerza,
-  ScreenCensoMujeres: StackCensoMujeres,
-  ScreenRadioButton: StackRadioButton
+  Dashboard: StackDashboard,
+  Clues: StackClues,
+  Incidencias: StackIncidencias,
+  EstadoFuerza: StackEstadoFuerza,
+  CensoMujeres: StackCensoMujeres
 }, {
   drawerPosition: 'left',
   contentComponent: CustomDrawerContentComponent,

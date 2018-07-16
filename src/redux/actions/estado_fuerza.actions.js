@@ -4,7 +4,6 @@ import {
   SHOW_ESTADO_FUERZA_SUCCESS,
   SHOW_ESTADO_FUERZA_FAIL,
   CREATE_ITEM_ARRAY,
-  CREATE_CARTERA_SERVICIOS_ARRAY
 } from '../../constants/ActionTypes';
 
 const URL = 'http://api.ugus.bid/public/api/v1/';
@@ -28,7 +27,6 @@ export const showEstadoFuerza = (clues, token) =>
 
 const showEstadoFuerzaSuccess = (dispatch, response) => {
   const estadosFuerza = response.cartera_servicios;
-
   dispatch({
     type: SHOW_ESTADO_FUERZA_SUCCESS,
     payload: estadosFuerza
@@ -60,7 +58,6 @@ export const insertNewEstadoFuerza = ({ clues, token, incidencias_id, fotoRefere
       } 
     })
     .then(response => {
-      console.log(response);
       insertNewEstadoFuerzaSuccess(dispatch, response.data);
     })
     .catch(error => {
@@ -76,35 +73,10 @@ const insertNewEstadoFuerzaSuccess = (dispatch, response) => {
   });
 };
 
-export const arrayItemCreated = (subItem, itemsArray) => {
-  const item = {};
-  item.id = subItem.id;
-  item.nombre = subItem.nombre;
-  item.cartera_servicios_id = subItem.cartera_servicios_id;
-  item.tipos_items_id = subItem.tipos_items_id;
-  item.respuesta = true;
-  
-  const arrayItems = [];
-  arrayItems.push(item);
-
+export const arrayItemCreated = (indexItem, indexCartera) => {
   return {
     type: CREATE_ITEM_ARRAY,
-    item,
-    arrayItems
-  };
-};
-
-export const arrayCarteraCreated = (subItem, itemsArray, carteraServicioArray) => {
-  const carteraServicio = {};
-  carteraServicio.id = subItem.cartera_servicios_id;
-  carteraServicio.items = itemsArray;
-
-  const arrayCarteraServicio = [];
-  arrayCarteraServicio.push(carteraServicio);
-
-  return {
-    type: CREATE_CARTERA_SERVICIOS_ARRAY,
-    carteraServicio,
-    arrayCarteraServicio
+    indexItem,
+    indexCartera
   };
 };

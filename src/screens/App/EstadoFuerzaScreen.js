@@ -10,10 +10,11 @@ import {
   CardItem,
   Body, 
   Left,
-  Text
+  Text, 
+  ListItem, 
+  CheckBox
 } from 'native-base';
 import { connect } from 'react-redux';
-import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
 import colors from '../../resources/styles/colors';
 import * as actions from '../../redux/actions';
 
@@ -27,42 +28,18 @@ class EstadoFuerzaScreen extends Component {
     this.makeRemoteRequest();
   }
 
-  onSelect(index, value) {
+  onSelect(subItem, indexItem, indexCartera) {
     const { 
       clues, 
       token,
-      itemsArray,
-      carteraServicioArray,
-      estadoFuerzaObject
+      cartera
     } = this.props;
-
-    this.props.arrayItemCreated(value, itemsArray);
-    this.props.arrayCarteraCreated(value, itemsArray, carteraServicioArray, estadoFuerzaObject);
+    //console.log(`Cartera: ${indexCartera} - item: ${indexItem}`);
+    //console.log(cartera[indexCartera].items[indexItem]);
+    //console.log(cartera);
+    
+    this.props.arrayItemCreated(indexItem, indexCartera);
   }
-
-  // carteraServicio.id = subitem.cartera_servicios_id;
-  // carteraServicio.items = itemsArray;
-
-  // carteraServicioArray.push(carteraServicio);
-
-  // estadoFuerzaObject.clues = clues;
-  // estadoFuerzaObject.sis_usuarios_id = 1;
-  // estadoFuerzaObject.turnos_id = 1;
-  // estadoFuerzaObject.cartera_servicios = carteraServicioArray;
-
-  onPressHandle = (subItem) => {
-    // const { 
-    //   clues, 
-    //   token,
-    //   itemsArray,
-    //   carteraServicioArray,
-    //   estadoFuerzaObject
-    // } = this.props;
-
-    // this.props.arrayItemCreated(subItem, itemsArray, carteraServicioArray, estadoFuerzaObject);
-
-    // console.log(subItem);
-  };
 
   makeRemoteRequest = async () => {
     const { clues, token } = this.props;
@@ -91,19 +68,16 @@ class EstadoFuerzaScreen extends Component {
                   <CardItem header bordered>
                     <Text>{item.nombre}</Text>
                   </CardItem>
-                  <CardItem bordered>
-                    <RadioGroup
-                      onSelect={(idx, value) => this.onSelect(idx, value)}
-                    >
-                      {
-                        item.items.map((subItem, i) => (
-                          <RadioButton key={i} value={subItem}>
-                            <Text>{subItem.nombre}</Text>
-                          </RadioButton>
-                        ))
-                      }
-                    </RadioGroup>
-                  </CardItem>
+                  {
+                    item.items.map((subItem, i) => (
+                      <ListItem key={i} onPress={() => this.onSelect(subItem, i, index)} >
+                        <CheckBox checked={subItem.respuesta !== ''} />
+                        <Body>
+                          <Text>{subItem.nombre}</Text>
+                        </Body>
+                      </ListItem>
+                    ))
+                  }
                 </Card>
               );
             }) : null
@@ -131,14 +105,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ auth, catalogs, estadoFuerza }) => {
   const { 
-    listEstadoFuerza, 
-    isSave, 
-    loading, 
-    item,
-    itemsArray,
-    carteraServicio,
-    carteraServicioArray,
-    estadoFuerzaObject,
+    listEstadoFuerza,
+    loading,
   } = estadoFuerza;
   const { token, clues } = auth;
   const { listMunicipios } = catalogs;
@@ -147,20 +115,8 @@ const mapStateToProps = ({ auth, catalogs, estadoFuerza }) => {
     clues, 
     token, 
     cartera: listEstadoFuerza,
-    isSave,
-    loading,
-    item,
-    itemsArray,
-    carteraServicio,
-    carteraServicioArray,
-    estadoFuerzaObject,
+    loading
   };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getEstadoFuerza: () => dispatch(showEstadoFuerza(ownProps.clues, ownProps.token))
-  }
 };
 
 export default connect(mapStateToProps, actions)(EstadoFuerzaScreen);

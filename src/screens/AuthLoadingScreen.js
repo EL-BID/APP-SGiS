@@ -8,17 +8,43 @@ import {
 } from 'react-native';
 import * as actions from '../redux/actions';
 
+/**
+ * Pantalla de carga que sirve para verificar si el usuario esta logueado o no
+ *
+ * @class AuthLoadingScreen
+ * @extends {Component}
+ *
+ */
 class AuthLoadingScreen extends Component {
+  /**
+   * Funcion del ciclo de vida React 
+   * se manda a llamar despues de renderizar el componente
+   * 
+   * @memberof AuthLoadingScreen
+   */
   componentDidMount() {
-    console.info('componentDidMount');
     this.bootstrapAsync();
   }
 
+  /**
+   * Funcion del ciclo de vida React
+   * se manda a llamar al momento que se detectan nuevos cambios 
+   * en las props
+   * 
+   * @param {*} nextProps
+   * @memberof AuthLoadingScreen
+   */
   componentWillReceiveProps(nextProps) {
-    console.info('componentWillReceiveProps');
     this.onAuthComplete(nextProps);
   }
 
+  /**
+   * Funcion que sirve para verificar si el usuario esta logueado o no
+   * viendo si tiene seleccionada una clues
+   *
+   * @param {*} props
+   * @memberof AuthLoadingScreen
+   */
   onAuthComplete(props) {
     if (props.isSelectClues) {
       this.props.navigation.navigate('App');
@@ -27,16 +53,17 @@ class AuthLoadingScreen extends Component {
     }
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
+  /**
+   * Funcion que sirve para obtener el token y la clues del usuario
+   *
+   * @memberof AuthLoadingScreen
+   */
   bootstrapAsync = async () => {
     await this.props.getToken();
     await this.props.getClues();
   };
 
-  // Render any loading content that you like here
   render() {
-    console.info('Render');
-    
     return (
       <View style={styles.container}>
         <ActivityIndicator size='large' />

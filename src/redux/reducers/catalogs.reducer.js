@@ -7,6 +7,8 @@ import {
     SHOW_ESTADOS_EMBARAZOS_SUCCESS,
     SHOW_DERECHOHABIENTES,
     SHOW_DERECHOHABIENTES_SUCCESS,
+    SHOW_TURNOS,
+    SHOW_TURNOS_SUCCESS
   } from '../../constants/ActionTypes';
   
   const initialState = {
@@ -15,6 +17,7 @@ import {
     listLocalidades: [],
     listEstadosEmbarazo: [],
     listDerechohabiente: [],
+    listTurno: [],
     error: null
   };
   
@@ -36,6 +39,10 @@ import {
         return { ...state, loading: true };
       case SHOW_DERECHOHABIENTES_SUCCESS:
         return { ...state, listDerechohabiente: [...state.listDerechohabiente, ...action.payload], loading: false };
+      case SHOW_TURNOS:
+        return { ...state, loading: true };
+      case SHOW_TURNOS_SUCCESS:
+        return { ...state, listTurno: [...state.listTurno, ...action.turnos], loading: false };
       default:
         return state;
     }

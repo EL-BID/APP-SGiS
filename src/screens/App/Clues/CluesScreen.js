@@ -14,18 +14,42 @@ import { connect } from 'react-redux';
 import colors from '../../../resources/styles/colors';
 import * as actions from '../../../redux/actions';
 
+/**
+ * Pantalla donde se listan las clues
+ *
+ * @class CluesScreen
+ * @extends {Component}
+ */
 class CluesScreen extends Component {
+  /**
+   * Funcion del ciclo de vida React 
+   * se manda a llamar despues de renderizar el componente
+   * 
+   * @memberof CluesScreen
+   */
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.makeRemoteRequest();
     });
   }
 
+  /**
+   * Funcion que sirve para detectar los cambios hechos en el form de busqueda 
+   *
+   * @param {*} text
+   * @memberof CluesScreen
+   */
   onSearchChange(text) {
     const { clues, token } = this.props;
     //this.props.onSearchChanged(text, clues, token);
   }
 
+  /**
+   * 
+   *
+   * @param {*} clues
+   * @memberof CluesScreen
+   */
   onItemPress(clues) {
     this.props.navigation.navigate('CluesDetalle', { clues });
   }
@@ -107,8 +131,6 @@ class CluesScreen extends Component {
               ListFooterComponent={this.renderFooter}
               refreshing={this.props.refreshing}
               onRefresh={this.handleRefresh}
-              onEndReached={this.handleLoadMore}
-              onEndReachedThreshold={0.1}
           />
           </List>
       </Container>

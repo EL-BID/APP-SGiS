@@ -6,25 +6,64 @@ import { Spinner } from '../../resources/components/Spinner';
 
 import * as actions from '../../redux/actions';
 
+/**
+ * Pantalla de Inicio de Sesión
+ *
+ * @class SingInScreen
+ * @extends {Component}
+ */
 class SingInScreen extends Component {
+  /**
+   * Funcion del ciclo de vida React
+   * se manda a llamar al momento que se detectan nuevos cambios 
+   * en las props
+   * 
+   * @param {*} nextProps
+   * @memberof SingInScreen
+   */
   componentWillReceiveProps(nextProps) {
     this.onAuthComplete(nextProps);
   }
 
+  /**
+   * Funcion que sirve para el inicio de sesión
+   * del usuario y enviarlo a la pantalla seleccionar clues
+   *
+   * @param {*} props
+   * @memberof SingInScreen
+   */
   onAuthComplete(props) {
     if (props.isLoggedIn) {
       this.props.navigation.navigate('SelectClues');
     }
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario de Email
+   *
+   * @param {*} text
+   * @memberof SingInScreen
+   */
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario de Contraseña
+   *
+   * @param {*} text
+   * @memberof SingInScreen
+   */
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
 
+  /**
+   * Funcion que sirve para enviar los datos del usuarioa ingresados
+   * y realizar el inicio de sesión
+   *
+   * @memberof SingInScreen
+   */
   onButtonPress() {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });

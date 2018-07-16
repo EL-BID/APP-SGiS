@@ -110,8 +110,6 @@ class CensoMujeresScreen extends Component {
           ListFooterComponent={this.renderFooter}
           refreshing={this.props.refreshing}
           onRefresh={this.handleRefresh}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={0.1}
         />
         </List>
         {this.renderActionButton()}

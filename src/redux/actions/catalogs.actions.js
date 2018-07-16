@@ -9,6 +9,8 @@ import {
     SHOW_ESTADOS_EMBARAZOS_SUCCESS,
     SHOW_DERECHOHABIENTES,
     SHOW_DERECHOHABIENTES_SUCCESS,
+    SHOW_TURNOS,
+    SHOW_TURNOS_SUCCESS
 } from '../../constants/ActionTypes';
 
 const URL = 'http://api.ugus.bid/public/api/v1/';
@@ -114,6 +116,32 @@ const showDerechohabienteSuccess = (dispatch, response) => {
   dispatch({
     type: SHOW_DERECHOHABIENTES_SUCCESS,
     payload: derechohabientes
+  });
+};
+
+export const showTurnos = (clues, token) => 
+  (dispatch) => {
+    dispatch({ type: SHOW_TURNOS });
+
+    axios.get(`${URL}turnos`, { headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer '.concat(token),
+      clues
+      } })
+    .then(response => {
+        showTurnoSuccess(dispatch, response.data.data);
+      })
+    .catch((error) => {
+        showTurnoFail(dispatch, error.response.status, token);
+      });
+  };
+
+const showTurnoSuccess = (dispatch, response) => {
+  const turnos = response;
+
+  dispatch({
+    type: SHOW_TURNOS_SUCCESS,
+    turnos
   });
 };
 
