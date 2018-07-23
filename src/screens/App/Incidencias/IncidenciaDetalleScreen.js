@@ -18,7 +18,19 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../../resources/styles/colors';
 
+/**
+* Clase que crea la Pantalla donde se muestran los detalles de la incidencia
+ *
+ * @class IncidenciaDetalleScreen
+ * @extends {Component}
+ */
 class IncidenciaDetalleScreen extends Component {
+  /**
+   * Funcion que sirve para navegar a la pantalla IncidenciaCamera
+   * enviando los datos de la incidenca
+   *
+   * @memberof IncidenciaDetalleScreen
+   */
   openScreenCamera = (referencia) => {
     const { incidencia } = this.props.navigation.state.params;
     const { impresion_diagnostica, motivo_ingreso, clues: cluesI, estados_incidencias_id } = incidencia;
@@ -27,6 +39,12 @@ class IncidenciaDetalleScreen extends Component {
     this.props.navigation.navigate('IncidenciaCamera', { referenciaId, incidencias_id, multimedias, impresion_diagnostica, motivo_ingreso, cluesI, estados_incidencias_id });
   };
 
+  /**
+   * Funcion que sirve para renderizar cada item de la lista de Movimientos que trae el array
+   * recibiendo el objeto item
+   *
+   * @memberof IncidenciaDetalleScreen
+   */
   renderItemAtenciones = (item) => (
     <ListItem>
       <Body>
@@ -36,6 +54,12 @@ class IncidenciaDetalleScreen extends Component {
     </ListItem>
   ); 
 
+  /**
+   * Funcion que sirve para renderizar cada item de la lista de Referencias que trae el array
+   * recibiendo el objeto item
+   *
+   * @memberof IncidenciaDetalleScreen
+   */
   renderItemReferencias = (item) => (
     <SwipeRow
       rightOpenValue={-75}
@@ -53,6 +77,12 @@ class IncidenciaDetalleScreen extends Component {
     />
   ); 
 
+  /**
+   * Funcion que sirve para renderizar cada item de la lista de Altas que trae el array
+   * recibiendo el objeto item
+   *
+   * @memberof IncidenciaDetalleScreen
+   */
   renderItemAltas = (item) => (
     <SwipeRow
       rightOpenValue={-75}
@@ -69,6 +99,13 @@ class IncidenciaDetalleScreen extends Component {
     />
   ); 
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof IncidenciaDetalleScreen
+   */
   render() {
     const { incidencia } = this.props.navigation.state.params;
     return (

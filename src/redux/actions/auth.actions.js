@@ -10,19 +10,37 @@ import {
   GET_TOKEN_FAIL,
   GET_CLUES,
   GET_CLUES_FAIL,
+  GET_USUARIO,
+  GET_USUARIO_FAIL,
   INSERT_SELECT_CLUES
 } from '../../constants/ActionTypes';
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla SignIn
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const emailChanged = (text) => ({
     type: EMAIL_CHANGED,
     payload: text
   });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla SignIn
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const passwordChanged = (text) => ({
     type: PASSWORD_CHANGED,
     payload: text
   });
 
+ /**
+ * Función que sirve para obtener la clues del usuario guardada en base de datos local (SQLite)
+ *
+ */
 export const getClues = () =>
   (dispatch) => {
     const query = 'SELECT clues FROM configuracion';
@@ -30,17 +48,21 @@ export const getClues = () =>
 
     db.transaction((tx) => {
       tx.executeSql(query, params, (tx, results) => {
-          const len = results.rows.length;
-          if (len > 0) {
-            const row = results.rows.item(0);
-            dispatch({ type: GET_CLUES, clues: row.clues });
-          } else {
-            dispatch({ type: GET_CLUES_FAIL, clues: 'clues' });
-          }
-         });
+        const len = results.rows.length;
+        if (len > 0) {
+          const row = results.rows.item(0);
+          dispatch({ type: GET_CLUES, clues: row.clues });
+        } else {
+          dispatch({ type: GET_CLUES_FAIL, clues: 'clues' });
+        }
+        });
     });
   };
 
+ /**
+ * Función que sirve para obtener el token del usuario guardada en base de datos local (SQLite)
+ *
+ */
 export const getToken = () =>
   (dispatch) => {
     const query = 'SELECT token FROM configuracion';
@@ -48,18 +70,40 @@ export const getToken = () =>
 
     db.transaction((tx) => {
       tx.executeSql(query, params, (tx, results) => {
-          const len = results.rows.length;
-          if (len > 0) {
-            const row = results.rows.item(0);
-            dispatch({ type: GET_TOKEN, token: row.token });
-          } else {
-            dispatch({ type: GET_TOKEN_FAIL, token: 'token' });
-          }
-         });
+        const len = results.rows.length;
+        if (len > 0) {
+          const row = results.rows.item(0);
+          dispatch({ type: GET_TOKEN, token: row.token });
+        } else {
+          dispatch({ type: GET_TOKEN_FAIL, token: 'token' });
+        }
+        });
     });
   };
 
-const URL = 'http://api.ugus.bid/public/api/v1';
+ /**
+ * Función que sirve para obtener la clues del usuario guardada en base de datos local (SQLite)
+ *
+ */
+export const getUser = () =>
+  (dispatch) => {
+    const query = 'SELECT usuario FROM configuracion';
+    const params = [];
+
+    db.transaction((tx) => {
+      tx.executeSql(query, params, (tx, results) => {
+        const len = results.rows.length;
+        if (len > 0) {
+          const row = results.rows.item(0);
+          dispatch({ type: GET_USUARIO, usuario: row.usuario });
+        } else {
+          dispatch({ type: GET_USUARIO_FAIL, usuario: 'usuario' });
+        }
+        });
+    });
+  };
+
+const URL = 'http://api.ugus.bid/api/v1';
 //const token = 'Bearer '.concat(this.state.token);
 const config = {
   headers: {
@@ -68,6 +112,13 @@ const config = {
   }
 };
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y realizar el logueo del usuario
+ *
+ * @param {*} email
+ * @param {*} password
+ */
 export const loginUser = ({ email, password }) =>
   (dispatch) => {
     dispatch({ type: LOGIN_USER });
@@ -81,6 +132,13 @@ export const loginUser = ({ email, password }) =>
     });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * e inserta la informacion del usuario en la base de datos local (SQLite)
+ *
+ * @param {*} dispatch
+ * @param {*} user informacion del usuario
+ */
 const loginUserSuccess = (dispatch, user) => {
   const { access_token, server_info, usuario, usuario_clues } = user;
 
@@ -89,7 +147,7 @@ const loginUserSuccess = (dispatch, user) => {
                   (server_info, token, usuario, usuario_clues) 
                   VALUES (?,?,?,?)`,
     [JSON.stringify(server_info), access_token,
-     JSON.stringify(usuario), JSON.stringify(usuario_clues)]);
+    JSON.stringify(usuario), JSON.stringify(usuario_clues)]);
   });
 
   dispatch({
@@ -98,10 +156,21 @@ const loginUserSuccess = (dispatch, user) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta fallo
+ *
+ * @param {*} dispatch
+ */
 const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
+ /**
+ * Funcion que sirve para insertar la clues seleccionada por el usuario
+ * a la base de datos local (SQLite)
+ *
+ * @param {*} clues
+ */
 export const insertSelectClues = (clues) => 
   (dispatch) => {
     db.transaction((tx) => {

@@ -15,7 +15,7 @@ import colors from '../../../resources/styles/colors';
 import * as actions from '../../../redux/actions';
 
 /**
- * Pantalla donde se listan las clues
+ * Clase que crea la Pantalla donde se listan las clues
  *
  * @class CluesScreen
  * @extends {Component}
@@ -45,7 +45,9 @@ class CluesScreen extends Component {
   }
 
   /**
-   * 
+   * Funcion que sirve para navegar al detalla de la clues
+   * enviando la informacion de la clues seleccionada a la pantalla
+   * CluesDetalle
    *
    * @param {*} clues
    * @memberof CluesScreen
@@ -54,21 +56,31 @@ class CluesScreen extends Component {
     this.props.navigation.navigate('CluesDetalle', { clues });
   }
 
+  /**
+   * Funcion que se llama para consultar la lista de clues
+   *
+   * @memberof CluesScreen
+   */
   makeRemoteRequest = async () => {
     const { clues, token, page, limit } = this.props;
     await this.props.showClues(clues, token, page, limit);
   };
 
+  /**
+   * Funcion que sirve para hacer actualizar la lista de clues
+   * por si esta no se hubiese cargado
+   *
+   * @memberof CluesScreen
+   */
   handleRefresh = () => {
     this.makeRemoteRequest();
   }
 
-  handleLoadMore = () => {
-    const { page } = this.props;
-    this.props.nextPage(page);
-    this.makeRemoteRequest();
-  }
-
+  /**
+   * Funcion que sirve para crear el separador de las listas
+   *
+   * @memberof CluesScreen
+   */
   renderSeparator = () => (
     <View 
       style={{
@@ -78,6 +90,13 @@ class CluesScreen extends Component {
       }}
     />
   );
+
+  /**
+   * Funcion que sirve para renderizar cada item en la lista con el diseño que se desee 
+   * recibiendo el objeto item
+   *
+   * @memberof CluesScreen
+   */
   renderItem = (item) => (
     <ListItem
       onPress={() => this.onItemPress(item)}
@@ -93,9 +112,16 @@ class CluesScreen extends Component {
     </ListItem>
   ); 
 
+  /**
+   * Funcion que sirve para crear el Footer (pie) de la pantalla
+   * evalua si esta cargado o si ya obtuvo los datos
+   *
+   * @memberof CluesScreen
+   */
   renderFooter = () => {
     if (this.props.loading) return null;
 
+    // Si esta en carga (obteniendo la informacion) se muestra un indicador de actividad
     return (
       <View
         style={{
@@ -109,6 +135,13 @@ class CluesScreen extends Component {
     );
   };
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof CluesScreen
+   */
   render() {
     return (
       <Container>
@@ -153,6 +186,13 @@ const styles = StyleSheet.create({
   }
 });
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { cluesR, auth }
+ * @returns
+ */
 const mapStateToProps = ({ cluesR, auth }) => {
   const { listClues, page, limit, loading, error, refreshing } = cluesR;
   const { token, clues } = auth;

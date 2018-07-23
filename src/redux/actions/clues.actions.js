@@ -11,6 +11,14 @@ import {
 
 const URL = 'http://api.ugus.bid/public/api/v1/';
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista de clues
+ * @param {*} clues
+ * @param {*} token
+ * @param {*} page
+ * @param {*} limit
+ */
 export const showClues = (clues, token, page, limit) => 
   (dispatch) => {
     dispatch({ type: SHOW_CLUES, payload: page + 15 });
@@ -19,15 +27,20 @@ export const showClues = (clues, token, page, limit) =>
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
-      } })
-     .then(response => {
+      } }).then(response => {
         showCluesSuccess(dispatch, response.data.data);
-      })
-     .catch((error) => {
+      }).catch((error) => {
         showCluesFail(dispatch, error.response.status, token);
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showCluesSuccess = (dispatch, response) => {
   const clues = response;
 
@@ -37,6 +50,13 @@ const showCluesSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showCluesFail = (dispatch, error, token) => {
   if (error === 403) {
     refreshToken(dispatch, token);
@@ -49,6 +69,12 @@ const showCluesFail = (dispatch, error, token) => {
   }
 };
 
+ /**
+ * Función que se usa para actulizar el token en caso de que este ya este caducado
+ *
+ * @param {*} dispatch
+ * @param {*} token
+ */
 const refreshToken = (dispatch, token) => {
   //dispatch({ type: REFRESH_TOKEN });
   axios.post(`${URL}refresh-token`, { }, { headers: {
@@ -63,6 +89,13 @@ const refreshToken = (dispatch, token) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} token
+ */
 const refreshTokenSuccess = (dispatch, token) => {
   db.transaction((tx) => {
     tx.executeSql('UPDATE configuracion SET token=?', [token]);
@@ -70,6 +103,13 @@ const refreshTokenSuccess = (dispatch, token) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} error
+ */
 const refreshTokenFail = (dispatch, error) => {
   dispatch({ 
     type: REFRESH_TOKEN_FAIL, 

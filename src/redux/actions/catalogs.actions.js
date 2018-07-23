@@ -13,8 +13,15 @@ import {
     SHOW_TURNOS_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/public/api/v1/';
+const URL = 'http://api.ugus.bid/api/v1/';
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del catalogo municipios
+ *
+ * @param {*} clues
+ * @param {*} token
+ */
 export const showMunicipios = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_MUNICIPIOS });
@@ -32,6 +39,13 @@ export const showMunicipios = (clues, token) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showMunicipioSuccess = (dispatch, response) => {
   const municipios = response;
 
@@ -41,6 +55,13 @@ const showMunicipioSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del catalogo municipios
+ *
+ * @param {*} clues
+ * @param {*} token
+ */
 export const showLocalidades = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_LOCALIDADES });
@@ -58,6 +79,13 @@ export const showLocalidades = (clues, token) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showLocalidadSuccess = (dispatch, response) => {
   const localidades = response;
 
@@ -67,6 +95,13 @@ const showLocalidadSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del catalogo embarazos
+ *
+ * @param {*} clues
+ * @param {*} token
+ */
 export const showEstadosEmbarazos = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_ESTADOS_EMBARAZOS });
@@ -84,6 +119,13 @@ export const showEstadosEmbarazos = (clues, token) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showEstadoEmbarazoSuccess = (dispatch, response) => {
   const edoEmbarazos = response;
 
@@ -93,6 +135,14 @@ const showEstadoEmbarazoSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del catalogo derechohabientes
+ *
+ * @param {*} clues
+ * @param {*} token
+ */
 export const showDerechohabientes = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_DERECHOHABIENTES });
@@ -110,6 +160,13 @@ export const showDerechohabientes = (clues, token) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showDerechohabienteSuccess = (dispatch, response) => {
   const derechohabientes = response;
 
@@ -119,6 +176,13 @@ const showDerechohabienteSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del catalogo turnos
+ *
+ * @param {*} clues
+ * @param {*} token
+ */
 export const showTurnos = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_TURNOS });
@@ -136,6 +200,13 @@ export const showTurnos = (clues, token) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showTurnoSuccess = (dispatch, response) => {
   const turnos = response;
 

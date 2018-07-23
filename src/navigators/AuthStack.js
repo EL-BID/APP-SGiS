@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import SignInScreen from '../screens/Auth/SignInScreen';
 import SelectCluesScreen from '../screens/Auth/SelectCluesScreen';
 
+//Sirve para crear un apilador de pantallas para Autorizacion
 const AuthStack = createStackNavigator({   
   SignIn: {
     screen: SignInScreen,

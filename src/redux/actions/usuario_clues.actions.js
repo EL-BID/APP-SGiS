@@ -3,6 +3,10 @@ import {
   SHOW_USUARIO_CLUES
 } from '../../constants/ActionTypes';
 
+ /**
+ * Función que sirve para obtener la clues asignadas al usuario guardada en base de datos local (SQLite)
+ *
+ */
 export const showUsuarioClues = () => 
   (dispatch) => {
     const query = 'SELECT usuario_clues FROM configuracion';

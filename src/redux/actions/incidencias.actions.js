@@ -11,8 +11,17 @@ import {
   INSERT_NEW_PHOTO_REFERENCIA_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/public/api/v1/';
+const URL = 'http://api.ugus.bid/api/v1/';
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista de incidencias
+ *
+ * @param {*} clues
+ * @param {*} token
+ * @param {*} page
+ * @param {*} limit
+ */
 export const showIncidencias = (clues, token, page, limit) => 
   (dispatch) => {
     dispatch({ type: SHOW_INCIDENCIAS });
@@ -30,6 +39,13 @@ export const showIncidencias = (clues, token, page, limit) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showIncidenciasSuccess = (dispatch, response) => {
   const incidencias = response;
   incidencias.pop();
@@ -40,6 +56,13 @@ const showIncidenciasSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showIncidenciasFail = (dispatch, error, token) => {
   if (error === 403) {
     refreshToken(dispatch, token);
@@ -52,6 +75,12 @@ const showIncidenciasFail = (dispatch, error, token) => {
   }
 };
 
+ /**
+ * Función que se usa para actulizar el token en caso de que este ya este caducado
+ *
+ * @param {*} dispatch
+ * @param {*} token
+ */
 const refreshToken = (dispatch, token) => {
   //dispatch({ type: REFRESH_TOKEN });
   axios.post(`${URL}refresh-token`, { }, { headers: {
@@ -66,6 +95,13 @@ const refreshToken = (dispatch, token) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} token
+ */
 const refreshTokenSuccess = (dispatch, token) => {
   db.transaction((tx) => {
     tx.executeSql('UPDATE configuracion SET token=?', [token]);
@@ -73,6 +109,13 @@ const refreshTokenSuccess = (dispatch, token) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} error
+ */
 const refreshTokenFail = (dispatch, error) => {
   dispatch({ 
     type: REFRESH_TOKEN_FAIL, 
@@ -80,6 +123,15 @@ const refreshTokenFail = (dispatch, error) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} clues
+ * @param {*} token
+ * @param {*} incidencias_id
+ * @param {*} fotoReferencia
+ */
 export const insertNewPhotoReference = ({ clues, token, incidencias_id, fotoReferencia }) =>
   (dispatch) => {
     dispatch({ type: INSERT_NEW_PHOTO_REFERENCIA });
@@ -101,6 +153,13 @@ export const insertNewPhotoReference = ({ clues, token, incidencias_id, fotoRefe
     });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const insertNewPhotoReferenceSuccess = (dispatch, response) => {
   dispatch({
     type: INSERT_NEW_PHOTO_REFERENCIA_SUCCESS,

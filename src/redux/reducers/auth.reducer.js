@@ -8,6 +8,8 @@ import {
   GET_TOKEN_FAIL,
   GET_CLUES,
   GET_CLUES_FAIL,
+  GET_USUARIO,
+  GET_USUARIO_FAIL,
   INSERT_SELECT_CLUES,
   REFRESH_TOKEN_SUCCESS
 } from '../../constants/ActionTypes';
@@ -20,7 +22,8 @@ const initialState = {
   isLoggedIn: false,
   isSelectClues: false,
   clues: '',
-  token: ''
+  token: '',
+  usuario: '',
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +36,10 @@ export default function (state = initialState, action) {
       return { ...state, clues: action.clues };
     case GET_CLUES_FAIL:
       return { ...state, clues: action.clues };
+    case GET_USUARIO:
+      return { ...state, usuario: action.usuario };
+    case GET_USUARIO_FAIL:
+      return { ...state, usuario: action.usuario };
     case EMAIL_CHANGED:
       return { ...state, email: action.payload };
     case PASSWORD_CHANGED:

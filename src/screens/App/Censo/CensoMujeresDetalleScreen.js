@@ -3,7 +3,20 @@ import { StatusBar, Text, StyleSheet } from 'react-native';
 import { Card, CardItem, Container, Header, Left, Body, Right, Icon, Title } from 'native-base';
 import colors from '../../../resources/styles/colors';
 
+/**
+ * Clase que crea la Pantalla donde se muestran la informacion de la Mujer
+ *
+ * @class CensoMujeresDetalleScreen
+ * @extends {Component}
+ */
 class CensoMujeresDetalleScreen extends Component {
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof CensoMujeresDetalleScreen
+   */
   render() {
     const { censo } = this.props.navigation.state.params;
 

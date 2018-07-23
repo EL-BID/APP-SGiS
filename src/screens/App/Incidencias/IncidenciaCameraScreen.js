@@ -15,12 +15,24 @@ import ImagePicker from 'react-native-image-picker';
 import colors from '../../../resources/styles/colors';
 import * as actions from '../../../redux/actions';
 
+/**
+ * Clase que crea la Pantalla donde se muestran las opciones 
+ * para adjuntar una imagen a la incidencia
+ *
+ * @class IncidenciaCameraScreen
+ * @extends {Component}
+ */
 class IncidenciaCameraScreen extends Component {
   state = {
     avatarSource: null,
     base64: null
   };
 
+  /**
+   * Funcion que forma y envia el array para adjuntar la foto a la incidencia
+   *
+   * @memberof IncidenciaCameraScreen
+   */
   enviarFoto = () => {
     const { clues, token } = this.props;
     const { 
@@ -51,11 +63,16 @@ class IncidenciaCameraScreen extends Component {
     miObjeto.foto_referencia_celular = arrayReferencia;
 
     const fotoReferencia = JSON.stringify(miObjeto);
-    //console.log(fotoReferencia);
     
     this.props.insertNewPhotoReference({ clues, token, incidencias_id, fotoReferencia });
   };
 
+  /**
+   * Funcion que permite seleccionar de donde se obtendra la foto
+   * que se desea adjutar a la incidencia
+   *
+   * @memberof IncidenciaCameraScreen
+   */
   selectPhotoTapped() {
     const options = {
       quality: 1.0,
@@ -86,6 +103,13 @@ class IncidenciaCameraScreen extends Component {
     });
   }
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof IncidenciaCameraScreen
+   */
   render() {
     return (
       <Container>
@@ -151,6 +175,13 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { auth }
+ * @returns token, clues
+ */
 const mapStateTopProps = ({ auth }) => {
   const { token, clues } = auth;
 

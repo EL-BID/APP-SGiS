@@ -5,7 +5,7 @@ import { List, ListItem } from 'react-native-elements';
 import * as actions from '../../redux/actions';
 
 /**
- * Pantalla que sirve para que el usuario seleccione la clues
+ * Clase que crea la Pantalla que sirve para que el usuario seleccione la clues
  * a la cual desea ingresar
  *
  * @class SelectCluesScreen
@@ -75,6 +75,13 @@ class SelectCluesScreen extends Component {
             ));
   }
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof SelectCluesScreen
+   */
   render() {
     return (
       <View style={styles.container}>
@@ -93,6 +100,13 @@ const styles = {
   }
 };
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { usuarioClues, auth } desde el estado
+ * @returns usuario_clues, clues, isSelectClues
+ */
 const mapStateToProps = ({ usuarioClues, auth }) => {
   const { list } = usuarioClues;
   const { clues, isSelectClues } = auth;

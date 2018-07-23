@@ -4,9 +4,13 @@ import {
   SHOW_ESTADO_FUERZA_SUCCESS,
   SHOW_ESTADO_FUERZA_FAIL,
   CREATE_ITEM_ARRAY,
+  CREATE_ITEM_FORM_ARRAY,
+  TURNO_CHANGED,
+  INSERT_NEW_STATE_STRONG,
+  INSERT_NEW_STATE_STRONG_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/public/api/v1/';
+const URL = 'http://api.ugus.bid/api/v1/';
 
 export const showEstadoFuerza = (clues, token) => 
   (dispatch) => {
@@ -26,6 +30,8 @@ export const showEstadoFuerza = (clues, token) =>
   };
 
 const showEstadoFuerzaSuccess = (dispatch, response) => {
+  console.log(response);
+  
   const estadosFuerza = response.cartera_servicios;
   dispatch({
     type: SHOW_ESTADO_FUERZA_SUCCESS,
@@ -46,11 +52,11 @@ const showEstadoFuerzaFail = (dispatch, error, token) => {
   });
 };
 
-export const insertNewEstadoFuerza = ({ clues, token, incidencias_id, fotoReferencia }) =>
+export const insertNewEstadoFuerza = ({ clues, token, estadoFuerza }) =>
   (dispatch) => {
-    dispatch({ type: INSERT_NEW_PHOTO_REFERENCIA });
+    dispatch({ type: INSERT_NEW_STATE_STRONG });
     
-    axios.put(`${URL}incidencias/${incidencias_id}`, fotoReferencia, { 
+    axios.put(`${URL}estados-fuerza/0`, estadoFuerza, { 
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer '.concat(token),
@@ -68,15 +74,35 @@ export const insertNewEstadoFuerza = ({ clues, token, incidencias_id, fotoRefere
 
 const insertNewEstadoFuerzaSuccess = (dispatch, response) => {
   dispatch({
-    type: INSERT_NEW_PHOTO_REFERENCIA_SUCCESS,
+    type: INSERT_NEW_STATE_STRONG_SUCCESS,
     payload: 'ok'
   });
 };
+
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
+export const turnoChanged = (text) => ({
+  type: TURNO_CHANGED,
+  payload: text
+});
 
 export const arrayItemCreated = (indexItem, indexCartera) => {
   return {
     type: CREATE_ITEM_ARRAY,
     indexItem,
     indexCartera
+  };
+};
+
+export const arrayItemFormCreated = (indexCartera, indexItem, text) => {
+  return {
+    type: CREATE_ITEM_FORM_ARRAY,
+    indexItem,
+    indexCartera,
+    text
   };
 };

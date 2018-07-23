@@ -155,6 +155,13 @@ const styles = {
   }
 };
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { auth }
+ * @returns email, password, error, loading, isLoggedIn
+ */
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading, isLoggedIn } = auth;
 

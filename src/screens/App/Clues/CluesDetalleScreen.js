@@ -3,7 +3,21 @@ import { StatusBar, Text, StyleSheet } from 'react-native';
 import { Card, CardItem, Container, Header, Left, Body, Right, Icon, Title } from 'native-base';
 import colors from '../../../resources/styles/colors';
 
+/**
+ * Clase que crea la Pantalla donde se muestran la informacion de las clues
+ *
+ * @class CluesScreen
+ * @extends {Component}
+ */
 class CluesDetalleScreen extends Component {
+
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof CluesDetalleScreen
+   */
   render() {
       const { clues } = this.props.navigation.state.params;
 

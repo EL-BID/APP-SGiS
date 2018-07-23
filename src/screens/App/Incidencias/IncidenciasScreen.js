@@ -22,12 +22,24 @@ import { connect } from 'react-redux';
 import colors from '../../../resources/styles/colors';
 import * as actions from '../../../redux/actions';
 
+/**
+* Clase que crea la Pantalla donde se listan las incidencias
+ *
+ * @class IncidenciasScreen
+ * @extends {PureComponent}
+ */
 class IncidenciasScreen extends PureComponent {
   state = {
     renderHeader: false,
     renderList: false,
   }
 
+  /**
+   * Funcion del ciclo de vida React 
+   * se manda a llamar despues de renderizar el componente
+   * 
+   * @memberof IncidenciasScreen
+   */
   componentDidMount() {
     setTimeout(() => { this.setState({ renderHeader: true }) }, 0);
     setTimeout(() => { this.setState({ renderList: true }) }, 0);
@@ -37,19 +49,43 @@ class IncidenciasScreen extends PureComponent {
     });
   }
 
+  /**
+   * Funcion que sirve para navegar al detalla de la clues
+   * enviando la informacion de la incidencia seleccionada a la pantalla
+   * IncidenciaDetalle
+   *
+   * @param {*} incidencia
+   * @memberof IncidenciasScreen
+   */
   onItemPress(incidencia) {
     this.props.navigation.navigate('IncidenciaDetalle', { incidencia });
   }
 
+  /**
+   * Funcion que se llama para consultar la lista de incidencias
+   *
+   * @memberof IncidenciasScreen
+   */
   makeRemoteRequest = async () => {
     const { clues, token, page, limit } = this.props;
     await this.props.showIncidencias(clues, token, page, limit);
   };
 
+  /**
+   * Funcion que sirve para hacer actulizar la lista de incidencias
+   * por si esta no se hubiese cargado
+   *
+   * @memberof IncidenciasScreen
+   */
   handleRefresh = () => {
     this.makeRemoteRequest();
   }
 
+  /**
+   * Funcion que sirve para crear el separador de las listas
+   *
+   * @memberof IncidenciasScreen
+   */
   renderSeparator = () => (
     <View 
       style={{
@@ -60,6 +96,12 @@ class IncidenciasScreen extends PureComponent {
     />
   );
 
+  /**
+   * Funcion que sirve para renderizar cada item en la lista con el diseño que se desee 
+   * recibiendo el objeto item
+   *
+   * @memberof IncidenciasScreen
+   */
   renderItem = (item) => (
     <ListItem
       onPress={() => this.onItemPress(item)}
@@ -75,6 +117,12 @@ class IncidenciasScreen extends PureComponent {
     </ListItem>
   ); 
 
+  /**
+   * Funcion que sirve para crear el Footer (pie) de la pantalla
+   * evalua si esta cargado o si ya obtuvo los datos
+   *
+   * @memberof IncidenciasScreen
+   */
   renderFooter = () => {
     if (this.props.loading) return null;
 
@@ -91,6 +139,13 @@ class IncidenciasScreen extends PureComponent {
     );
   };
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof IncidenciasScreen
+   */
   render() {
     const {
       renderHeader,
@@ -150,6 +205,13 @@ const styles = StyleSheet.create({
   }
 });
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { incidencias, auth }
+ * @returns incidencias, token, clues, page, limit, loading, error, refreshing
+ */
 const mapStateToProps = ({ incidencias, auth }) => {
   const { listIncidencias, page, limit, loading, error, refreshing } = incidencias;
   const { token, clues } = auth;

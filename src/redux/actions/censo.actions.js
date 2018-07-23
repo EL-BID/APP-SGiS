@@ -20,6 +20,15 @@ import {
 
 const URL = 'http://api.ugus.bid/public/api/v1/';
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * y obtener la lista del mujeres en el censo
+ *
+ * @param {*} clues
+ * @param {*} token
+ * @param {*} page
+ * @param {*} limit
+ */
 export const showCenso = (clues, token, page, limit) => 
   (dispatch) => {
     dispatch({ type: SHOW_CENSO });
@@ -37,6 +46,13 @@ export const showCenso = (clues, token, page, limit) =>
       });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showCensoSuccess = (dispatch, response) => {
   const censo = response;
 
@@ -46,6 +62,13 @@ const showCensoSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que se usa cuando la respuesta regresa un error
+ * enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const showCensoFail = (dispatch, error, token) => {
   if (error === 403) {
     //refreshToken(dispatch, token);
@@ -59,6 +82,12 @@ const showCensoFail = (dispatch, error, token) => {
   });
 };
 
+ /**
+ * Función que sirve para enviar la peticion a la API
+ * e insertar los datos en la base
+ * @param {*} clues
+ * @param {*} token
+ */
 export const insertNewPerson = ({ clues, token, id, nombre, paterno, materno, domicilio, municipios_id, localidades_id, telefono, fecha_nacimiento, estados_embarazos_id, derechohabientes_id }) =>
   (dispatch) => {
     dispatch({ type: INSERT_NEW_PERSON });
@@ -93,6 +122,13 @@ export const insertNewPerson = ({ clues, token, id, nombre, paterno, materno, do
     });
   };
 
+ /**
+ * Función que se usa cuando la respuesta sea correcta
+ * y enviar la informacion al reducer
+ *
+ * @param {*} dispatch
+ * @param {*} response
+ */
 const insertNewPersonSuccess = (dispatch, response) => {
   dispatch({
     type: INSERT_NEW_PERSON_SUCCESS,
@@ -100,56 +136,122 @@ const insertNewPersonSuccess = (dispatch, response) => {
   });
 };
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const municipioChanged = (text) => ({
   type: MUNICIPIO_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const localidadChanged = (text) => ({
   type: LOCALIDAD_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const estadoEmbarazoChanged = (text) => ({
   type: ESTADO_EMBARAZO_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const derechohabienteChanged = (text) => ({
   type: DERECHOHABIENTE_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const curpChanged = (text) => ({
   type: CURP_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const nombreChanged = (text) => ({
   type: NOMBRE_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const paternoChanged = (text) => ({
   type: PATERNO_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const maternoChanged = (text) => ({
   type: MATERNO_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const direccionChanged = (text) => ({
   type: DIRECCION_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const celularChanged = (text) => ({
   type: CELULAR_CHANGED,
   payload: text
 });
 
+ /**
+ * Función que sirve para enviar al reducer los datos que se reciben desde la pantalla NuevoCenso
+ * cada que se actualiza el contenido del form
+ *
+ * @param {*} text
+ */
 export const fechaNacimientoChanged = (text) => ({
   type: FECHA_NACIMIENTO_CHANGED,
   payload: text

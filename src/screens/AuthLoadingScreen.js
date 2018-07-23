@@ -60,9 +60,17 @@ class AuthLoadingScreen extends Component {
    */
   bootstrapAsync = async () => {
     await this.props.getToken();
+    await this.props.getUser();
     await this.props.getClues();
   };
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof AuthLoadingScreen
+   */
   render() {
     return (
       <View style={styles.container}>
@@ -81,10 +89,17 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estadod e la aplicación
+ *
+ * @param {*} { auth }
+ * @returns isSelectClues, token, clues
+ */
 const mapStateToProps = ({ auth }) => {
-  const { isSelectClues, token, clues } = auth;
+  const { isSelectClues, token, clues, usuario } = auth;
 
-  return { isSelectClues, token, clues };
+  return { isSelectClues, token, clues, usuario };
 };
 
 export default connect(mapStateToProps, actions)(AuthLoadingScreen);

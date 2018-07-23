@@ -14,6 +14,7 @@ import CensoMujeresScreen from '../screens/App/Censo/CensoMujeresScreen';
 import CensoMujeresDetalleScreen from '../screens/App/Censo/CensoMujeresDetalleScreen';
 import CensoMujeresNuevoScreen from '../screens/App/Censo/CensoMujeresNuevoScreen';
 
+//Sirve para crear un apilador de pantallas para Dashboard
 const StackDashboard = createStackNavigator({
 	Dashboard: {
 		screen: DashboardScreen,
@@ -25,6 +26,7 @@ const StackDashboard = createStackNavigator({
 	},
 });
 
+//Sirve para crear un apilador de pantallas para Clues
 const StackClues = createStackNavigator({
 	Clues: {
 		screen: CluesScreen,
@@ -44,6 +46,7 @@ const StackClues = createStackNavigator({
 	},
 });
 
+//Sirve para crear un apilador de pantallas para Incidencias
 const StackIncidencias = createStackNavigator({
 	Incidencias: {
 		screen: IncidenciasScreen,
@@ -71,6 +74,7 @@ const StackIncidencias = createStackNavigator({
 	}
 });
 
+//Sirve para crear un apilador de pantallas para Estado e Fuerza
 const StackEstadoFuerza = createStackNavigator({
 	EstadoFuerza: {
 		screen: EstadoFuerzaScreen,
@@ -82,6 +86,7 @@ const StackEstadoFuerza = createStackNavigator({
 	}
 });
 
+//Sirve para crear un apilador de pantallas para Censo de mujeres
 const StackCensoMujeres = createStackNavigator({
 	CensoMujeres: {
 		screen: CensoMujeresScreen,
@@ -109,6 +114,7 @@ const StackCensoMujeres = createStackNavigator({
 	}
 });
 
+//Sirve para crear menu de cajon personalizado para la app
 const CustomDrawerContentComponent = (props) => {
   return (
     <Container>
@@ -127,6 +133,7 @@ const CustomDrawerContentComponent = (props) => {
   );
 };
 
+//Sirve para definir las Pantallas que estaran dentro del menu de Cajon
 export default AppDrawer = createDrawerNavigator({
   Dashboard: StackDashboard,
   Clues: StackClues,

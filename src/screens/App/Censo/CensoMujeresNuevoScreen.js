@@ -6,17 +6,43 @@ import { Container, Header, Left, Body, Right, Icon, Title, Form, Picker } from 
 import colors from '../../../resources/styles/colors';
 import * as actions from '../../../redux/actions';
 
+/**
+* Clase que crea la Pantalla donde se listan las incidencias
+ *
+ * @class CensoMujeresNuevoScreen
+ * @extends {Component}
+ */
 class CensoMujeresNuevoScreen extends Component {
+  /**
+   * Funcion del ciclo de vida React 
+   * se manda a llamar despues de renderizar el componente
+   * 
+   * @memberof CensoMujeresNuevoScreen
+   */
   componentDidMount() {
     this.makeRemoteRequest();
   }
 
+  /**
+   * Funcion del ciclo de vida React
+   * se manda a llamar al momento que se detectan nuevos cambios 
+   * en las props
+   * 
+   * @param {*} nextProps
+   * @memberof CensoMujeresNuevoScreen
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSave) {
       this.props.navigation.navigate('CensoMujeres');
     }
   }
   
+  /**
+   * Funcion que sirve para enviar los datos que agrego el usuario
+   * y realizar el guardado de la mujer
+   *
+   * @memberof CensoMujeresNuevoScreen
+   */
   onButtonSavePress() {
     const { clues, token, id, nombre, paterno, materno, domicilio, municipios_id, localidades_id,
       telefono, fecha_nacimiento, estados_embarazos_id, derechohabientes_id } = this.props;
@@ -37,50 +63,121 @@ class CensoMujeresNuevoScreen extends Component {
     });
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onMunicipioChange(text) {
     this.props.municipioChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onLocalidadChange(text) {
     this.props.localidadChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onEstadoEmbarazoChange(text) {
     this.props.estadoEmbarazoChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onDerechohabienteChange(text) {
     this.props.derechohabienteChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onCurpChange(text) {
     this.props.curpChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onNombreChange(text) {
     this.props.nombreChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onPaternoChange(text) {
     this.props.paternoChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onMaternoChange(text) {
     this.props.maternoChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onDireccionChange(text) {
     this.props.direccionChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onCelularChange(text) {
     this.props.celularChanged(text);
   }
 
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @param {*} text
+   * @memberof CensoMujeresNuevoScreen
+   */
   onFechaNacimientoChange(text) {
     this.props.fechaNacimientoChanged(text);
   }
   
+  /**
+   * Funcion que detecta el cambio en el formulario y lo envia el estado
+   *
+   * @memberof CensoMujeresNuevoScreen
+   */
   makeRemoteRequest = async () => {
     const { clues, token } = this.props;
     await this.props.showMunicipios(clues, token);
@@ -89,6 +186,13 @@ class CensoMujeresNuevoScreen extends Component {
     await this.props.showDerechohabientes(clues, token);
   };
 
+  /**
+   * Funcion del ciclo de vida React 
+   * renderiza la vista para que se muestre en pantalla
+   * 
+   * @returns
+   * @memberof CensoMujeresNuevoScreen
+   */
   render() {
     return (
       <Container>
@@ -336,6 +440,13 @@ const styles = StyleSheet.create({
   }
 });
 
+/**
+ * Se llama de la biblioteca de react-redux proporciona 
+ * una forma conveniente de acceder al estado de la aplicación
+ *
+ * @param {*} { auth, catalogs, censo }
+ * @returns
+ */
 const mapStateTopProps = ({ auth, catalogs, censo }) => {
   const { id, nombre, paterno, materno, domicilio, municipios_id, localidades_id,
     telefono, fecha_nacimiento, estados_embarazos_id, derechohabientes_id, isSave } = censo;
@@ -359,7 +470,7 @@ const mapStateTopProps = ({ auth, catalogs, censo }) => {
     telefono, 
     fecha_nacimiento, 
     estados_embarazos_id, 
-    derechohabientes_id ,
+    derechohabientes_id,
     isSave
   };
 };
