@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../utils/db';
+import { URL } from '../../services/api';
 import {
   SHOW_CLUES,
   SHOW_CLUES_SUCCESS,
@@ -8,8 +9,6 @@ import {
   REFRESH_TOKEN_SUCCESS,
   REFRESH_TOKEN_FAIL
 } from '../../constants/ActionTypes';
-
-const URL = 'http://api.ugus.bid/public/api/v1/';
 
  /**
  * Función que sirve para enviar la peticion a la API
@@ -23,7 +22,7 @@ export const showClues = (clues, token, page, limit) =>
   (dispatch) => {
     dispatch({ type: SHOW_CLUES, payload: page + 15 });
 
-    axios.get(`${URL}clues?pagina=${page}&limite=${limit}`, { headers: {
+    axios.get(`${URL}/clues?pagina=${page}&limite=${limit}`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -77,7 +76,7 @@ const showCluesFail = (dispatch, error, token) => {
  */
 const refreshToken = (dispatch, token) => {
   //dispatch({ type: REFRESH_TOKEN });
-  axios.post(`${URL}refresh-token`, { }, { headers: {
+  axios.post(`${URL}/refresh-token`, { }, { headers: {
     'Content-Type': 'application/json',
     Authorization: 'Bearer '.concat(token)
     } })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { URL } from '../../services/api';
 import {
     SHOW_MUNICIPIOS,
     SHOW_MUNICIPIOS_SUCCESS,
@@ -13,8 +13,6 @@ import {
     SHOW_TURNOS_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/api/v1/';
-
  /**
  * Función que sirve para enviar la peticion a la API
  * y obtener la lista del catalogo municipios
@@ -26,7 +24,7 @@ export const showMunicipios = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_MUNICIPIOS });
 
-    axios.get(`${URL}municipios`, { headers: {
+    axios.get(`${URL}//municipios`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -66,7 +64,7 @@ export const showLocalidades = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_LOCALIDADES });
 
-    axios.get(`${URL}localidades`, { headers: {
+    axios.get(`${URL}/localidades`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -106,7 +104,7 @@ export const showEstadosEmbarazos = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_ESTADOS_EMBARAZOS });
 
-    axios.get(`${URL}estados-embarazos`, { headers: {
+    axios.get(`${URL}/estados-embarazos`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -147,7 +145,7 @@ export const showDerechohabientes = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_DERECHOHABIENTES });
 
-    axios.get(`${URL}derechohabientes`, { headers: {
+    axios.get(`${URL}/derechohabientes`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -187,7 +185,7 @@ export const showTurnos = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_TURNOS });
 
-    axios.get(`${URL}turnos`, { headers: {
+    axios.get(`${URL}/turnos`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues

@@ -1,3 +1,2 @@
-import axios from 'axios';
 
-const URL = 'http://api.ugus.bid/public/api/v1/';
+export const URL = 'http://api.sgis.saludchiapas.gob.mx/api/v1';

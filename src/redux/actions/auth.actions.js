@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { db } from '../../utils/db';
+//import { URL } from '../../services/api';
+
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -103,7 +105,7 @@ export const getUser = () =>
     });
   };
 
-const URL = 'http://api.ugus.bid/api/v1';
+const URL = 'http://api.sgis.saludchiapas.gob.mx/api/v1';
 //const token = 'Bearer '.concat(this.state.token);
 const config = {
   headers: {
@@ -123,7 +125,7 @@ export const loginUser = ({ email, password }) =>
   (dispatch) => {
     dispatch({ type: LOGIN_USER });
 
-    axios.post(`${URL}/signin`, { email, password }, config)
+    axios.post(`${URL}//signin`, { email, password }, config)
     .then(response => {
       loginUserSuccess(dispatch, response.data);
     })

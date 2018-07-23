@@ -159,7 +159,7 @@ class EstadoFuerzaScreen extends Component {
                   </CardItem>
                   {
                     item.items.map((subItem, i) => {
-                      if (subItem.tipos_items_id === '1') {
+                      if (subItem.tipos_items_id === '1' || subItem.tipos_items_id === 1) {
                         return (
                           <ListItem key={i} onPress={() => this.onSelect(i, index)} >
                             <CheckBox checked={subItem.respuesta !== ''} />

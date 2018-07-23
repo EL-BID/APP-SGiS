@@ -115,6 +115,7 @@ class SingInScreen extends Component {
               underlineColorAndroid="#FF4081"
               onChangeText={this.onPasswordChange.bind(this)}
               value={this.props.password}
+              secureTextEntry
             />
           </View>
 

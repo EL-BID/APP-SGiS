@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { URL } from '../../services/api';
 import {
   SHOW_CENSO,
   SHOW_CENSO_SUCCESS,
@@ -18,8 +19,6 @@ import {
   INSERT_NEW_PERSON_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/public/api/v1/';
-
  /**
  * Función que sirve para enviar la peticion a la API
  * y obtener la lista del mujeres en el censo
@@ -33,7 +32,7 @@ export const showCenso = (clues, token, page, limit) =>
   (dispatch) => {
     dispatch({ type: SHOW_CENSO });
 
-    axios.get(`${URL}censo-personas?pagina=${page}&limite=${limit}`, { headers: {
+    axios.get(`${URL}/censo-personas?pagina=${page}&limite=${limit}`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -107,7 +106,7 @@ export const insertNewPerson = ({ clues, token, id, nombre, paterno, materno, do
       derechohabientes_id,
     };
 
-    axios.post(`${URL}censo-personas`, qs.stringify(data), { 
+    axios.post(`${URL}/censo-personas`, qs.stringify(data), { 
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: 'Bearer '.concat(token),

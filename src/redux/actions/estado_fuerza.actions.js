@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { URL } from '../../services/api';
 import {
   SHOW_ESTADO_FUERZA,
   SHOW_ESTADO_FUERZA_SUCCESS,
@@ -10,13 +11,11 @@ import {
   INSERT_NEW_STATE_STRONG_SUCCESS
 } from '../../constants/ActionTypes';
 
-const URL = 'http://api.ugus.bid/api/v1/';
-
 export const showEstadoFuerza = (clues, token) => 
   (dispatch) => {
     dispatch({ type: SHOW_ESTADO_FUERZA });
 
-    axios.get(`${URL}estados-fuerza/2`, { headers: {
+    axios.get(`${URL}/estados-fuerza/2`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
@@ -56,7 +55,7 @@ export const insertNewEstadoFuerza = ({ clues, token, estadoFuerza }) =>
   (dispatch) => {
     dispatch({ type: INSERT_NEW_STATE_STRONG });
     
-    axios.put(`${URL}estados-fuerza/0`, estadoFuerza, { 
+    axios.put(`${URL}/estados-fuerza/0`, estadoFuerza, { 
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer '.concat(token),
