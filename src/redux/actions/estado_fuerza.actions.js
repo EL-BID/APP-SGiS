@@ -89,11 +89,12 @@ export const turnoChanged = (text) => ({
   payload: text
 });
 
-export const arrayItemCreated = (indexItem, indexCartera) => {
+export const arrayItemCreated = (indexItem, indexCartera, respuesta) => {
   return {
     type: CREATE_ITEM_ARRAY,
     indexItem,
-    indexCartera
+    indexCartera,
+    respuesta
   };
 };
 

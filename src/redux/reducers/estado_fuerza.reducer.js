@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
       return { ...state, turnos_id: action.payload };
     case CREATE_ITEM_ARRAY: {
       const newList = [...state.listEstadoFuerza];      
-      newList[action.indexCartera].items[action.indexItem].respuesta = true;
+      newList[action.indexCartera].items[action.indexItem].respuesta = action.respuesta;
       return {
         ...state,
         listEstadoFuerza: newList

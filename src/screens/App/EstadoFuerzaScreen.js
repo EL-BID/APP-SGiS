@@ -44,8 +44,8 @@ class EstadoFuerzaScreen extends Component {
    * @param {*} indexCartera
    * @memberof EstadoFuerzaScreen
    */
-  onSelect(indexItem, indexCartera) {
-    this.props.arrayItemCreated(indexItem, indexCartera);
+  onSelect(indexItem, indexCartera, respuesta) {
+    this.props.arrayItemCreated(indexItem, indexCartera, respuesta !== '' ? '' : true);
   }
 
   /**
@@ -161,7 +161,7 @@ class EstadoFuerzaScreen extends Component {
                     item.items.map((subItem, i) => {
                       if (subItem.tipos_items_id === '1' || subItem.tipos_items_id === 1) {
                         return (
-                          <ListItem key={i} onPress={() => this.onSelect(i, index)} >
+                          <ListItem key={i} onPress={() => this.onSelect(i, index, subItem.respuesta)} >
                             <CheckBox checked={subItem.respuesta !== ''} />
                             <Body>
                               <Text>{subItem.nombre}</Text>
