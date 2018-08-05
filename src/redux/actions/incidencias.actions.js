@@ -25,15 +25,13 @@ export const showIncidencias = (clues, token, page, limit) =>
   (dispatch) => {
     dispatch({ type: SHOW_INCIDENCIAS });
 
-    axios.get(`${URL}//incidencias?en_transito=0&edo_incidencia=&pagina=${page}&limite=${limit}`, { headers: {
+    axios.get(`${URL}/incidencias?en_transito=0&edo_incidencia=&pagina=${page}&limite=${limit}`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
-      } })
-     .then(response => {
+      } }).then(response => {
         showIncidenciasSuccess(dispatch, response.data.data);
-      })
-     .catch((error) => {
+      }).catch((error) => {
         showIncidenciasFail(dispatch, error.response.status, token);
       });
   };
@@ -82,7 +80,7 @@ const showIncidenciasFail = (dispatch, error, token) => {
  */
 const refreshToken = (dispatch, token) => {
   //dispatch({ type: REFRESH_TOKEN });
-  axios.post(`${URL}//refresh-token`, { }, { headers: {
+  axios.post(`${URL}/refresh-token`, { }, { headers: {
     'Content-Type': 'application/json',
     Authorization: 'Bearer '.concat(token)
     } })
@@ -135,7 +133,7 @@ export const insertNewPhotoReference = ({ clues, token, incidencias_id, fotoRefe
   (dispatch) => {
     dispatch({ type: INSERT_NEW_PHOTO_REFERENCIA });
     
-    axios.put(`${URL}//incidencias/${incidencias_id}`, fotoReferencia, { 
+    axios.put(`${URL}/incidencias/${incidencias_id}`, fotoReferencia, { 
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer '.concat(token),

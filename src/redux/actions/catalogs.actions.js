@@ -24,7 +24,7 @@ export const showMunicipios = (clues, token) =>
   (dispatch) => {
     dispatch({ type: SHOW_MUNICIPIOS });
 
-    axios.get(`${URL}//municipios`, { headers: {
+    axios.get(`${URL}/municipios`, { headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer '.concat(token),
       clues
