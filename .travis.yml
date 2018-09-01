@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - "6.9"
 sudo: false
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
 cache:
   directories:
     - $HOME/.yarn-cache
@@ -11,17 +14,22 @@ env:
   - NODE_ENV='test'
 script:
   - npm test
-  - npm run bundle:ios
+  - yarn add global react-native-cli
 matrix:
   include:
     - language: android
       os: linux
       jdk: oraclejdk8
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
       sudo: required
       node_js: false
+      before_cache:
+        - rm -f ${TRAVIS_BUILD_DIR}/gradle/caches/modules-2/modules-2.lock # Avoid to repack it due locks
+        - rm -f ${TRAVIS_BUILD_DIR}/gradle/caches/3.3/classAnalysis/classAnalysis.lock
+        - rm -f ${TRAVIS_BUILD_DIR}/gradle/caches/3.3/jarSnapshots/jarSnapshots.lock
+      cache:
+        directories:
+          - ${TRAVIS_BUILD_DIR}/gradle/caches/
+          - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
       before_install:
         - nvm install 7
         - node --version
@@ -29,19 +37,19 @@ matrix:
         - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
         - travis_retry sudo apt-get update -qq
         - travis_retry sudo apt-get install -y -qq yarn
-      install:
-        - yarn
+        - echo yes | sdkmanager "platforms;android-26"
       android:
         components:
           - tools
-          - platform-tools
-          - build-tools-23.0.1
-          - android-23
-          - build-tools-27.0.3
-          - android-27
-          - extra-android-m2repository
-          - extra-google-google_play_services
+          - build-tools-27.0.2
+          - extra-android-support
           - extra-google-m2repository
-          - addon-google_apis-google-16
+          - extra-android-m2repository
+          - platform-tools
+          - tools
+      licenses:
+          - 'android-sdk-preview-license-.+'
+          - 'android-sdk-license-.+'
       script:
-        - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
+        - yarn install
+        - cd android && ./gradlew assembleDebug
