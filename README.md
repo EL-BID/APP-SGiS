@@ -2,11 +2,11 @@
 
 ## APP del Sistema de Gestión de Incidencias en Salud SGiS
 
-[![Build Status](https://travis-ci.org/Luisvl13/APP-SGiS.svg?branch=master)](https://travis-ci.org/Luisvl13/API-SGiS)
+[![Build Status](https://travis-ci.org/EL-BID/APP-SGiS.svg?branch=master)](https://travis-ci.org/EL-BID/APP-SGiS)
 
 ### Descripción y contexto
 ---
-Salud Mesoamérica, ME-G1001 & ME-G1004
+Salud Mesoamérica, ME-G1004
 
 Una de las prioridades de la Secretaría de Salud del Estado de Chiapas es tener herramientas para implementar acciones que permitan el acceso de las mujeres a los servicios obstétricos, a fin de reducir la muerte materna y neonatal; Por lo tanto, la creación de SGiS, es una estrategia para fortalecer la sistematización en atención de referencias, respuesta de urgencias, emergencias obstétricas y neonatales; cada unidad hospitalaria será la central de información; encargada de gestionar a pacientes en salud maternal, desde el monitoreo, registro y seguimiento de las incidencias; los procesos serán controlados a través de SGiS, estos para coordinar la red de servicios a fin de brindar una atención resolutiva a los usuarios dentro del menor tiempo posible.
 
@@ -69,6 +69,7 @@ Puedes ver el código de conducta para este proyecto en el siguiente archivo [CO
 ---
 * **[Luis Alberto Valdez Lescieur](https://github.com/Luisvl13  "Github")** - [Bitbucket](https://bitbucket.org/luisvl13 "Bitbucket") - [Twitter](https://twitter.com/LuisVLescieur)
 * **[Ramiro Gabriel Alférez Chavez](mailto:ramiro.alferez@gmail.com "Correo electrónico")**
+* **Margarita Sariñana Ortiz** - Secretaria de Salud del Estado de Chiapas ISECH
 
 ### Información adicional
 ---
