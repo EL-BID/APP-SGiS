@@ -3,6 +3,8 @@
 ## APP del Sistema de Gestión de Incidencias en Salud SGiS
 
 [![Build Status](https://travis-ci.org/EL-BID/APP-SGiS.svg?branch=master)](https://travis-ci.org/EL-BID/APP-SGiS)
+[![Analytics](https://gabeacon.irvinlim.com/UA-4677001-16/APP-SGiS/readme?useReferer)](https://github.com/EL-BID/APP-SGiS)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EL-BID_APP-SGiS&metric=alert_status)](https://sonarcloud.io/dashboard?id=EL-BID_APP-SGiS)
 
 ### Descripción y contexto
 ---
