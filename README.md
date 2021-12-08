@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/EL-BID/APP-SGiS.svg?branch=master)](https://travis-ci.org/EL-BID/APP-SGiS)
 [![Analytics](https://gabeacon.irvinlim.com/UA-4677001-16/APP-SGiS/readme?useReferer)](https://github.com/EL-BID/APP-SGiS)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EL-BID_APP-SGiS&metric=alert_status)](https://sonarcloud.io/dashboard?id=EL-BID_APP-SGiS)
+![analytics image (flat)](https://raw.githubusercontent.com/vitr/google-analytics-beacon/master/static/badge-flat.gif)
+![analytics](https://www.google-analytics.com/collect?v=1&cid=555&t=pageview&ec=repo&ea=open&dp=/APP-SGiS/readme&dt=&tid=UA-4677001-16)
 
 ### Descripción y contexto
 ---
